@@ -1,0 +1,9 @@
+
+* {
+    background:                 #040506;
+    foreground:                 #ABABAD;
+
+    selected-active-background: #424345;
+    selected-normal-background: #7E654E;
+    selected-urgent-background: #B36769;
+}

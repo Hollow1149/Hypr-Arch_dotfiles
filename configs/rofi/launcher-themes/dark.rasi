@@ -1,0 +1,136 @@
+/* config - Launcher */
+
+configuration {
+	modi:                         "drun,calc";
+    show-icons:                 true;
+    display-calc:               " ";
+    display-drun:               " ";
+  	drun-display-format:        "{name}";
+    font:                        "JetBrains Mono Nerd Font 12";
+}
+
+/* Config and colors ----------------------------------------------- */
+
+@import "default.rasi"
+
+/* Main Window ------------------------------------------------ */
+window {
+    width:                       55%;
+    height:                      70%;
+    margin:                      0%;
+    padding:                     0%;
+}
+
+/* Main Box --------------------------------------------------- */
+mainbox {
+
+    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+    background-color:            transparent;
+
+    spacing:                     1.25%;
+    margin:                      0%;
+    border:                      2px;
+    border-color:                @selected;
+    border-radius:               4.5% 2.5%; 
+    padding:                     2% 2%;
+}
+
+/* Inputbar --------------------------------------------------- */
+inputbar {
+    children:                    [ "prompt", "entry" ];
+
+    border:                      1px;
+    border-color:                @selected;
+    border-radius:               1.15%;
+    background-color:            @shade-bg;
+    text-color:                  @text;
+
+    spacing:                     0.625%;
+    margin:                      0% 20%;
+    padding:                     1.5%;
+}
+
+prompt {
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+textbox-prompt-colon {
+    expand:                      false;
+    str:                         "::";
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+/* Entry input ------------------------------------------------ */
+entry {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    placeholder:                 " ";
+    placeholder-color:           inherit;
+}
+
+/* Listview --------------------------------------------------- */
+listview {
+    cursor:                      "default";
+    columns:                     6;
+    lines:                       4;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    background-color:            transparent;
+    text-color:                  @text;
+
+    spacing:                     0%;
+    margin:                      0%;
+    padding:                     0%;
+}
+
+/* ---- Mode Switcher ---- */
+mode-switcher{
+    background-color:            transparent;
+    border:                      0%;
+
+    margin: 0%;
+    padding: 0%;
+    spacing: 0.625%;
+}
+button {
+    padding:                     1.5%;
+    border-radius:               1.5%;
+    background-color:            @shade-shadow;
+    text-color:                  @text;
+    cursor:                      pointer;
+}
+button selected {
+    background-color:            @shade-bg;
+    border:                      0.13% solid;
+    border-color:                @selected;
+    text-color:                  white;
+}
+
+/* Elements --------------------------------------------------- */
+element {
+    cursor:                      pointer;
+    border-radius:               1.8% 1%;
+    background-color:            transparent;
+    text-color:                  @text;
+    orientation:                 vertical;
+
+    spacing:                     0.8%;
+    margin:                      0%;
+    padding:                     2% 0%;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        6.5%;
+    cursor:                      inherit;
+}

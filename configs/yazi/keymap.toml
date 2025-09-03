@@ -1,0 +1,87 @@
+#####################
+### yazi Keybinds ###
+#####################
+
+### Dropping into shell ###
+[[mgr.prepend_keymap]]
+on = "!"
+for = "unix"
+run = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+### Smart-Paste ###
+[[mgr.prepend_keymap]]
+on = "p"
+run = "plugin smart-paste"
+desc = "Paste into the hovered directory or CWD"
+
+### Smart-Tab ###
+[[mgr.prepend_keymap]]
+on = "t"
+run = "plugin smart-tab"
+desc = "create a tab and enter the hovered directory"
+
+### Copy selected file to the system clipboard while yanking ###
+[[mgr.prepend_keymap]]
+on = "y"
+run = [
+  'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
+  "yank",
+]
+
+### Navigate parent directory without leaving the CWD ###
+[[mgr.prepend_keymap]]
+on = "K"
+run = "plugin parent-arrow -1"
+
+[[mgr.prepend_keymap]]
+on = "J"
+run = "plugin parent-arrow 1"
+
+### Smart-Switch ###
+[[mgr.prepend_keymap]]
+on = "2"
+run = "plugin smart-switch 1"
+desc = "Switch or create tab 2"
+
+### Confirm quitting if multiple tabs are open ###
+[[mgr.prepend_keymap]]
+on = "q"
+run = "plugin confirm-quit"
+
+### Drag and drop ###
+[[mgr.prepend_keymap]]
+on = "<C-n>"
+run = 'shell -- dragon-drop -x -i -T "$1"'
+
+### Close input be once Esc press ###
+[[input.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel input"
+
+### Toggle Preview pane ###
+[[mgr.prepend_keymap]]
+on = "T"
+run = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
+
+[[manager.prepend_keymap]]
+on = "H"
+run = "plugin duckdb -1"
+desc = "Scroll one column to the left"
+
+[[manager.prepend_keymap]]
+on = "L"
+run = "plugin duckdb +1"
+desc = "Scroll one column to the right"
+
+[[manager.prepend_keymap]]
+on = ["g", "o"]
+run = "plugin duckdb -open"
+desc = "open with duckdb"
+
+[[manager.prepend_keymap]]
+on = ["g", "u"]
+run = "plugin duckdb -ui"
+desc = "open with duckdb ui"

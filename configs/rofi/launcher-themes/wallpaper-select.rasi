@@ -1,0 +1,76 @@
+/* config - Wallpaper select */
+
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+  	drun-display-format:         "{name}";
+    hover-select:                true;
+    font:                        "JetBrains Mono Nerd Font 10";
+}
+/* Config and colors ----------------------------------------------- */
+
+@import "~/.config/rofi/launcher-themes/default.rasi"
+
+/* Main Window ------------------------------------------------ */
+window {
+    width:                       70%;
+    height:                      31%;
+    margin:                      0px;
+    padding:                     0px;
+    anchor:                      north;
+    location:                    south;
+}
+
+/* Main Box --------------------------------------------------- */
+mainbox {
+    children:                    [ "listview" ];
+    background-color:            transparent;
+    border:                      2px;
+    border-color:                @selected;
+    border-radius:               4.5% 2.5%;
+
+    spacing:                     24px;
+    margin:                      0px;
+    padding:                     10px 10px;
+}
+
+/* ---- List ---- */
+listview {
+    columns:                     4;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+
+    background-color:           transparent;
+    text-color:                 @foreground;
+
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+}
+
+/* Elements --------------------------------------------------- */
+element {
+    cursor:                      pointer;
+    border-radius:               36px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    orientation:                 vertical;
+
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+}
+
+element-icon {
+    expand:                      false;
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        26%;
+    cursor:                      inherit;
+}
