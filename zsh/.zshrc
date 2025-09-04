@@ -123,6 +123,7 @@ alias auto-start="sudo systemctl stop power-profiles-daemon.service && sudo syst
 alias auto-stop="sudo systemctl disable --now auto-cpufreq"
 alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/Artemis/Applications/PostgreSQL_db/logfile start"
 alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
+alias lsda="lsd -A"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
