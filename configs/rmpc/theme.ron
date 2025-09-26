@@ -85,7 +85,8 @@
         panes: [
             (
                 pane: Pane(Header),
-                size: "2",
+                borders: "ALL",
+                size: "4",
             ),
             (
                 pane: Pane(Tabs),
@@ -94,10 +95,12 @@
             (
                 pane: Pane(TabContent),
                 size: "100%",
+                borders: "ALL",
             ),
             (
                 pane: Pane(ProgressBar),
-                size: "1",
+                size: "3",
+                borders: "ALL",
             ),
         ],
     ),

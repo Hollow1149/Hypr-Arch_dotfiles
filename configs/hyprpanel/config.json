@@ -106,7 +106,7 @@
   "wallpaper.image": "/home/Artemis/Pictures/Wallpapers/current_wallpaper",
   "theme.matugen_settings.variation": "standard_2",
   "theme.matugen_settings.mode": "dark",
-  "theme.matugen_settings.scheme_type": "fidelity",
+  "theme.matugen_settings.scheme_type": "fruit-salad",
   "theme.bar.transparent": true,
   "theme.bar.buttons.style": "split",
   "theme.bar.buttons.opacity": 100,
@@ -119,5 +119,6 @@
   "theme.bar.menus.menu.dashboard.profile.size": "8.5em",
   "bar.workspaces.applicationIconEmptyWorkspace": "空",
   "bar.workspaces.applicationIconFallback": "普",
-  "theme.matugen_settings.contrast": 0
+  "theme.matugen_settings.contrast": 0,
+  "menus.clock.weather.enabled": false
 }

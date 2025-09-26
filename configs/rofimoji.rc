@@ -1,0 +1,7 @@
+action = type
+max-recent = 0
+no-frecency=True
+hidden-descriptions=True
+use-icons=True
+selector=rofi
+selector-args="-theme ~/.config/rofi/launcher-themes/emoji-picker.rasi"

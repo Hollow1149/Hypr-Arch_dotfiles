@@ -37,7 +37,7 @@ generate_thumbnail() {
       # For GIFs, create a thumbnail from the first frame
       filename="$(basename "$pic")"
       thumb="$thumbDir/${filename}.png"
-      [[ ! -f "$thumb" ]] && convert "${pic[0]}" -resize 500 "$thumb" 2>/dev/null
+      [[ ! -f "$thumb" ]] && convert "$pic[0]" -resize 500 "$thumb" 2>/dev/null
     fi
   done <"$listCache"
 }

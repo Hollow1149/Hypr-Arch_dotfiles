@@ -4,7 +4,7 @@
 
 [mgr]
 sort_by = "natural"
-sort_sensitive = false
+sort_sensitive = true
 sort_dir_first = true
 show_hidden = false
 show_symlink = false
@@ -20,26 +20,11 @@ prepend_preloaders = [
   { mime = "application/subrip", run = "mediainfo" },
   { mime = "application/postscript", run = "mediainfo" },
 
-  { name = "*.csv", run = "duckdb", multi = false },
-  { name = "*.tsv", run = "duckdb", multi = false },
-  { name = "*.json", run = "duckdb", multi = false },
-  { name = "*.parquet", run = "duckdb", multi = false },
-  { name = "*.txt", run = "duckdb", multi = false },
-  { name = "*.xlsx", run = "duckdb", multi = false },
 ]
 prepend_previewers = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
   { mime = "application/subrip", run = "mediainfo" },
   { mime = "application/postscript", run = "mediainfo" },
-
-  { name = "*.csv", run = "duckdb" },
-  { name = "*.tsv", run = "duckdb" },
-  { name = "*.json", run = "duckdb" },
-  { name = "*.parquet", run = "duckdb" },
-  { name = "*.txt", run = "duckdb" },
-  { name = "*.xlsx", run = "duckdb" },
-  { name = "*.db", run = "duckdb" },
-  { name = "*.duckdb", run = "duckdb" },
 
   # Archive previewer
   { mime = "application/*zip", run = "ouch" },
@@ -73,9 +58,16 @@ image_options = [
   { run = 'exiftool -all -G -s "$@" | bat --paging always ', block = true, desc = "Show EXIF" },
 ]
 
+video_options = [{ run = 'vlc "$@"', orphan = true, desc = "Open in VLC" }]
+
 [open]
 rules = [
   { name = "bulk-rename.txt", use = "bulk-rename" },
+  { name = "*.gif", use = [
+    "image_options",
+    "video_options",
+  ] },
   { mime = "text/*", use = "edit_options" },
   { mime = "image/*", use = "image_options" },
+  { mime = "video/*", use = "video_options" },
 ]

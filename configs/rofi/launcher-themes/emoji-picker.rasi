@@ -1,10 +1,7 @@
 /* config - Launcher */
 
 configuration {
-	modi:                         "drun";
     show-icons:                 true;
-    display-drun:               " ";
-  	drun-display-format:        "{name}";
     font:                        "JetBrains Mono Nerd Font 12";
 }
 
@@ -14,16 +11,18 @@ configuration {
 
 /* Main Window ------------------------------------------------ */
 window {
-    width:                       55%;
-    height:                      70%;
-    margin:                      0%;
+    width:                       40%;
+    height:                      46%;
+    margin:                      0.5%;
     padding:                     0%;
+    anchor:                      west;
+    location:                    south east;
 }
 
 /* Main Box --------------------------------------------------- */
 mainbox {
 
-    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+    children:                    [ "inputbar", "listview" ];
     background-color:            transparent;
 
     spacing:                     1.25%;
@@ -31,12 +30,12 @@ mainbox {
     border:                      2px;
     border-color:                @selected;
     border-radius:               4.5% 2.5%; 
-    padding:                     2% 2%;
+    padding:                     1% 0.5%;
 }
 
 /* Inputbar --------------------------------------------------- */
 inputbar {
-    children:                    [ "prompt", "entry" ];
+    children:                    [ "entry" ];
 
     border:                      1px;
     border-color:                @selected;
@@ -45,13 +44,8 @@ inputbar {
     text-color:                  @text;
 
     spacing:                     0.625%;
-    margin:                      0% 20%;
+    margin:                      0% 13%;
     padding:                     1.5%;
-}
-
-prompt {
-    background-color:            transparent;
-    text-color:                  inherit;
 }
 
 textbox-prompt-colon {
@@ -91,15 +85,6 @@ listview {
     padding:                     0%;
 }
 
-/* ---- Mode Switcher ---- */
-mode-switcher{
-    background-color:            transparent;
-    border:                      0%;
-
-    margin: 0%;
-    padding: 0%;
-    spacing: 0.625%;
-}
 button {
     padding:                     1.5%;
     border-radius:               1.5%;
@@ -119,17 +104,15 @@ element {
     cursor:                      pointer;
     border-radius:               1.8% 1%;
     background-color:            transparent;
-    text-color:                  @text;
     orientation:                 vertical;
 
-    spacing:                     0.8%;
+    spacing:                     0%;
     margin:                      0%;
-    padding:                     2% 0%;
+    padding:                     1% 0%;
 }
 
 element-icon {
     background-color:            transparent;
-    text-color:                  inherit;
-    size:                        6.5%;
+    size:                        5%;
     cursor:                      inherit;
 }

@@ -23,10 +23,5 @@ use = "ndtoan96/ouch"
 rev = "0742fff"
 hash = "2bd799b42b8e42b8ef100310be71f8d1"
 
-[[plugin.deps]]
-use = "wylie102/duckdb"
-rev = "3f8c863"
-hash = "87b9233a74325e95011670ed20bbd0d4"
-
 [flavor]
 deps = []

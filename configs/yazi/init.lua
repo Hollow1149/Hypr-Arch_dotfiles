@@ -1,6 +1,5 @@
 require("full-border"):setup()
 require("folder-rules"):setup()
-require("duckdb"):setup()
 
 -- Show symlink in status bar --
 Status:children_add(function(self)
