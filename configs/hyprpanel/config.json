@@ -28,15 +28,15 @@
   "theme.bar.location": "top",
   "theme.bar.buttons.enableBorders": false,
   "theme.bar.enableShadow": false,
-  "theme.bar.outer_spacing": "0.3em",
-  "theme.bar.buttons.y_margins": "0.3em",
+  "theme.bar.outer_spacing": "0.2em",
+  "theme.bar.buttons.y_margins": "0em",
   "theme.bar.buttons.padding_x": "0.7rem",
   "theme.bar.buttons.radius": "0.3em",
   "theme.bar.layer": "top",
   "theme.bar.dropdownGap": "2.3em",
   "theme.bar.margin_top": "0.1em",
   "theme.bar.margin_sides": "0.2em",
-  "bar.launcher.autoDetectIcon": false,
+  "bar.launcher.autoDetectIcon": true,
   "theme.bar.buttons.dashboard.enableBorder": false,
   "bar.workspaces.show_icons": false,
   "bar.workspaces.show_numbered": false,
@@ -101,17 +101,17 @@
   "menus.power.sleep": "sleep 0.25 && hyprlock",
   "theme.bar.menus.monochrome": false,
   "wallpaper.enable": false,
-  "theme.bar.menus.opacity": 100,
+  "theme.bar.menus.opacity": 80,
   "theme.matugen": true,
   "wallpaper.image": "/home/Artemis/Pictures/Wallpapers/current_wallpaper",
   "theme.matugen_settings.variation": "standard_2",
   "theme.matugen_settings.mode": "dark",
-  "theme.matugen_settings.scheme_type": "fruit-salad",
+  "theme.matugen_settings.scheme_type": "expressive",
   "theme.bar.transparent": true,
   "theme.bar.buttons.style": "split",
   "theme.bar.buttons.opacity": 100,
-  "theme.bar.buttons.background_opacity": 95,
-  "theme.bar.buttons.background_hover_opacity": 95,
+  "theme.bar.buttons.background_opacity": 70,
+  "theme.bar.buttons.background_hover_opacity": 90,
   "menus.power.lowBatteryNotification": true,
   "menus.clock.weather.key": "676f072d46764b2db8991218251608",
   "theme.bar.border.location": "none",
@@ -120,5 +120,62 @@
   "bar.workspaces.applicationIconEmptyWorkspace": "空",
   "bar.workspaces.applicationIconFallback": "普",
   "theme.matugen_settings.contrast": 0,
-  "menus.clock.weather.enabled": false
+  "menus.clock.weather.enabled": false,
+  "notifications.clearDelay": 100,
+  "theme.bar.menus.menu.notifications.height": "58em",
+  "theme.bar.opacity": 30,
+  "theme.osd.opacity": 80,
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media",
+        "cava"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
+      ]
+    }
+  },
+  "bar.autoHide": "never"
 }

@@ -15,7 +15,7 @@ configuration {
 window {
     width:                       70%;
     height:                      31%;
-    margin:                      0px;
+    margin:                      0.4%;
     padding:                     0px;
     anchor:                      north;
     location:                    south;
@@ -25,7 +25,7 @@ window {
 mainbox {
     children:                    [ "listview" ];
     background-color:            transparent;
-    border:                      2px;
+    border:                      3px;
     border-color:                @selected;
     border-radius:               4.5% 2.5%;
 

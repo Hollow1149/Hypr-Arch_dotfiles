@@ -15,7 +15,7 @@ configuration {
 /* Main Window ------------------------------------------------ */
 window {
     width:                       55%;
-    height:                      70%;
+    height:                      71%;
     margin:                      0%;
     padding:                     0%;
 }

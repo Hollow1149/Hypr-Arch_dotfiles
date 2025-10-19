@@ -14,18 +14,16 @@ wrap = "yes"
 
 ### Plugins ###
 [plugin]
-
 prepend_preloaders = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
   { mime = "application/subrip", run = "mediainfo" },
   { mime = "application/postscript", run = "mediainfo" },
-
 ]
+
 prepend_previewers = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
   { mime = "application/subrip", run = "mediainfo" },
   { mime = "application/postscript", run = "mediainfo" },
-
   # Archive previewer
   { mime = "application/*zip", run = "ouch" },
   { mime = "application/x-tar", run = "ouch" },
@@ -42,14 +40,7 @@ prepend_previewers = [
 
 # For opening files with application #
 
-[[opener.bulk-rename]]
-run = 'nvim "$@"'
-block = true
-
-
 [opener]
-
-edit_options = [{ run = 'nvim "$@"', block = true, desc = "Edit using NVIM" }]
 
 image_options = [
   { run = 'loupe "$@"', orphan = true, desc = "View in Loupe" },
@@ -61,13 +52,11 @@ image_options = [
 video_options = [{ run = 'vlc "$@"', orphan = true, desc = "Open in VLC" }]
 
 [open]
-rules = [
-  { name = "bulk-rename.txt", use = "bulk-rename" },
+prepend_rules = [
   { name = "*.gif", use = [
     "image_options",
     "video_options",
   ] },
-  { mime = "text/*", use = "edit_options" },
   { mime = "image/*", use = "image_options" },
   { mime = "video/*", use = "video_options" },
 ]

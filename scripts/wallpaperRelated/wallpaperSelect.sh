@@ -14,7 +14,7 @@ mkdir -p "$thumbDir"
 # Transition settings
 FPS=60
 TYPE="any"
-DURATION=3
+DURATION=1.5
 BEZIER="0.4,0.2,0.4,1.0"
 SWWW_PARAMS="--transition-fps ${FPS} --transition-type ${TYPE} --transition-duration ${DURATION} --transition-bezier ${BEZIER}"
 
@@ -67,7 +67,7 @@ fi
 mapfile -t PICS <"$listCache"
 
 # Random wallpaper logic
-randomPreviewImage="$HOME/Pictures/Lockscreen/.question-unown.png"
+randomPreviewImage="$HOME/Pictures/Others/.question_unown.png"
 randomNumber=$(((RANDOM + $(date +%s) + $$) % ${#PICS[@]}))
 randomPicture="${PICS[$randomNumber]}"
 randomChoice="[${#PICS[@]}] Random"

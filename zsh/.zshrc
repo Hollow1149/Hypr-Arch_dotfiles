@@ -6,6 +6,7 @@ export FONTCONFIG_PATH=/etc/fonts
 export PATH="$HOME/.local/bin:$PATH"
 export QT_QPA_PLATFORMTHEME=qt6ct
 export PGHOST=~/Applications/PostgreSQL_db/
+export EDITOR=nvim
 
 #####################
 ### Shell Options ###
@@ -91,9 +92,14 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -A --icon always $realpath'
 ##########################
 
 eval "$(fzf --zsh)" # Using Ctrl+r #
-
 zinit cdreplay -q
 
+###########################
+### zoxide Integrations ###
+###########################
+
+export _ZO_ECHO=1
+eval "$(zoxide init --cmd cd zsh)"
 
 ############################
 ### oh-my-posh execution ###
@@ -124,6 +130,8 @@ alias auto-stop="sudo systemctl disable --now auto-cpufreq"
 alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/Artemis/Applications/PostgreSQL_db/logfile start"
 alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
 alias lsda="lsd -A"
+alias superparu="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --paru"
+alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -133,3 +141,5 @@ export NVM_DIR="$HOME/.config/nvm"
 ### Run Pokemon-colorscripts ###
 ################################
 pokemon-colorscripts -r --no-title
+
+. "$HOME/.local/share/../bin/env"
