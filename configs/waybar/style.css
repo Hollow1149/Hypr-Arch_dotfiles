@@ -22,28 +22,23 @@ tooltip {
 
 #workspaces button,
 #window,
-#submap,
 #mpris,
-#privacy-item,
 #bluetooth,
 #network,
 #clock,
 #tray,
 #cpu,
 #battery,
-#custom-notification_tray,
-#power-profiles-daemon,
 #memory,
 #backlight,
 #pulseaudio,
-#gamemode,
-#custom-updates {
+#custom-notification {
   /*text-shadow: 1px 1px 2px rgb(0, 0, 0);*/
   /* text shadow, offset-x | offset-y | blur-radius | color */
   background: #292c3c;
   /*#15161e default*/
   /* background color */
-  margin: 2px 4px 0px 4px;
+  margin: 2px 4px 2px 4px;
   /* empty spaces around */
   padding: 1px 10px;
   /* extend pill size, vertical then horizontal */
@@ -143,26 +138,4 @@ tooltip {
   min-width: 10px;
   border-radius: 5px;
   background: green;
-}
-
-#backlight-slider slider {
-  min-height: 0px;
-  min-width: 0px;
-  opacity: 0;
-  background-image: none;
-  border: none;
-  box-shadow: none;
-}
-
-#backlight-slider trough {
-  min-height: 10px;
-  min-width: 80px;
-  border-radius: 5px;
-  background-color: black;
-}
-
-#backlight-slider highlight {
-  min-width: 10px;
-  border-radius: 5px;
-  background-color: red;
 }
