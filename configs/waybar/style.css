@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
   font-family: "JetBrainsMono Nerd Font Mono";
   font-weight: bold;
@@ -35,33 +37,24 @@ tooltip {
 #custom-notification {
   /*text-shadow: 1px 1px 2px rgb(0, 0, 0);*/
   /* text shadow, offset-x | offset-y | blur-radius | color */
-  background: #292c3c;
+  background: alpha(@bakgrnd, 0.5);
   /*#15161e default*/
   /* background color */
   margin: 2px 4px 2px 4px;
   /* empty spaces around */
   padding: 1px 10px;
   /* extend pill size, vertical then horizontal */
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.185);
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0);
   /* pill background shadows */
   border-radius: 10px;
   /*Default 5*/
   /* rounded corners */
-  color: #77b5a6;
+  color: @frgrnd;
 }
 
 /* extend empty space on both side of the bar,
  * value from ~/.config/hypr/hyprland.conf
  * gaps_out (8px) + border size (2px) = 10px */
-
-#clock {
-  padding-right: 5px;
-}
-
-#privacy-item {
-  background: #e64553;
-  color: #15161e;
-}
 
 /**#tray menu {
     font-weight: bold;
@@ -70,6 +63,7 @@ tooltip {
 #workspaces {
   padding: 0 3px;
   /* remove padding around workspace module */
+  color: @color2
 }
 
 #workspaces button {
@@ -81,7 +75,7 @@ tooltip {
     background-color, border-left-color, border-right-color;
   transition-duration: 0.1s;
   font-size: 10px;
-  color: #c0caf5;
+  color: @color4;
 }
 
 #workspaces button.empty {
@@ -94,23 +88,56 @@ tooltip {
 
 #workspaces button.active {
   /* active workspace */
-  background: #7899df;
+  background: @color6;
 
 }
 
 #workspaces button:hover {
-  background: #77b5a6;
+  background: @selected;
   /* hovered workspace color */
-}
-
-#power-profiles-daemon {
-  color: #c4cdf2;
 }
 
 @keyframes blink {
   to {
     background-color: #e64553;
   }
+}
+
+#memory {
+  color: @color5;
+}
+
+#cpu {
+  color: @color5;
+}
+
+#battery {
+  color: @color10;
+}
+
+#backlight {
+  color: @color10;
+}
+
+#tray {
+  background: transparent;
+  color: @color3;
+}
+
+#mpris {
+  color: @color15;
+}
+
+#window {
+  color: @color1;
+}
+
+#clock {
+  color: @color11
+}
+
+#custom-notification {
+  color: @selected;
 }
 
 #pulseaudio-slider {
@@ -131,11 +158,11 @@ tooltip {
   min-height: 10px;
   min-width: 80px;
   border-radius: 5px;
-  background: black;
+  background: @bakgrnd;
 }
 
 #pulseaudio-slider highlight {
   min-width: 10px;
   border-radius: 5px;
-  background: green;
+  background: @frgrnd ;
 }
