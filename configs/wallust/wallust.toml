@@ -43,8 +43,10 @@ check_contrast = true
 hyprland = { template = 'hyprland.hbs', target = '~/.config/hypr/Configs/hyprcolor.conf' }
 rofi = { template = 'rofi.hbs', target = '~/.config/rofi/launcher-themes/colors.rasi' }
 kitty = { template = 'kitty.conf', target = '~/.config/kitty/kittycolors.conf' }
+swaync = { template = 'swaync.hbs', target = '~/.config/swaync/colors.css' }
 wlogout = { template = 'wlogout.hbs', target = '~/.config/wlogout/colors.css' }
 cava = { template = 'cava.hbs', target = '~/.config/cava/config' }
+waybar = { template = 'waybar.hbs', target = '~/.config/waybar/colors.css'}
 
 # NOTE: prefer '' over "" for paths, avoids escaping.
 # template: A RELATIVE path that points to `~/.config/wallust/template` (depends on platform)
