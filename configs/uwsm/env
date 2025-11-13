@@ -1,13 +1,13 @@
 export XDG_CURRENT_DESKTOP=Hyprland
-export XDG_SESSION_TYPE,wayland
-export XDG_SESSION_DESKTOP,Hyprland
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
 
 #Environment-variables needed for Nvidia GPU
-export LIBVA_DRIVER_NAME, nvidia
-export __GLX_VENDOR_LIBRARY_NAME, nvidia
+export LIBVA_DRIVER_NAME= nvidia
+export __GLX_VENDOR_LIBRARY_NAME= nvidia
 
 #To enable native Wayland support for most electron apps
-export ELECTORN_OZONE_PLATFORM_HINT, auto
+export ELECTORN_OZONE_PLATFORM_HINT= auto
 
 #To enable hardware video acceleration
-export NVD_BACKEND,direct
+export NVD_BACKEND=direct

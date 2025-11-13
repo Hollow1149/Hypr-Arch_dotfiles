@@ -1,4 +1,4 @@
-export HYPRCURSOR_THEME,rose-pine-hyprcursor
-export XCURSOR_THEME,BreezeX-RosePine-Linux
-export XCURSOR_SIZE,27
-export HYPRCURSOR_SIZE,27
+export HYPRCURSOR_THEME=rose-pine-hyprcursor
+export XCURSOR_THEME=BreezeX-RosePine-Linux
+export XCURSOR_SIZE=27
+export HYPRCURSOR_SIZE=27
