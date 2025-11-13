@@ -6,7 +6,8 @@ export FONTCONFIG_PATH=/etc/fonts
 export PATH="$HOME/.local/bin:$PATH"
 export QT_QPA_PLATFORMTHEME=qt6ct
 export PGHOST=~/Applications/PostgreSQL_db/
-export EDITOR=nvim
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 #####################
 ### Shell Options ###
@@ -99,6 +100,7 @@ zinit cdreplay -q
 ###########################
 
 export _ZO_ECHO=1
+export _ZO_EXCLUDE_DIRS=$HOME:$HOME/Projects/cllmm/*
 eval "$(zoxide init --cmd cd zsh)"
 
 ############################
@@ -132,6 +134,7 @@ alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
 alias lsda="lsd -A"
 alias superparu="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --paru"
 alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
+alias gemini="cd ~/Projects/cllmm/gemini && command gemini"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
