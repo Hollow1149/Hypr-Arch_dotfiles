@@ -9,9 +9,17 @@ fi
 case "$1" in
 --pacman)
   package_manager=pacman
+  fzf_args=(
+    --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
+  )
   ;;
 --paru)
   package_manager=paru
+  fzf_args=(
+    --preview-label='alt-p: toggle description, alt-j/k: scroll,alt-b/B:toggle PKGBUILD, tab: multi-select'
+    --bind 'alt-b:change-preview:paru -Gpa {1}'
+    --bind 'alt-B:change-preview:paru -Sii {1}'
+  )
   ;;
 *)
   echo "Unknown tag '$1'"
@@ -20,10 +28,9 @@ case "$1" in
   ;;
 esac
 
-fzf_args=(
+fzf_args+=(
   --multi
   --preview "$package_manager -Sii {1}"
-  --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select, F11: maximize'
   --preview-label-pos='bottom'
   --preview-window 'down:65%:wrap'
   --bind 'alt-p:toggle-preview'
