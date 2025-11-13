@@ -14,9 +14,9 @@ window#waybar {
 
 tooltip {
   font-family: inherit;
-  background: #15161e;
+  background: alpha(@bakgrnd, 0.7);
   /* tooltip background */
-  border: 2px solid #c0caf5;
+  border: 1px solid @color13;
   /* tooltip border size and color */
   border-radius: 5px;
   /* tooltip rounded corners */
@@ -63,14 +63,14 @@ tooltip {
 #workspaces {
   padding: 0 3px;
   /* remove padding around workspace module */
-  color: @color2
+  color: @color2;
 }
 
 #workspaces button {
   padding: 4px 4px 4px 4px;
   /* fit with pill padding, 0px for not haveing duped vertical padding, 4px to make a square (4px value from module padding: ...#clock {padding >>4px<< 10px}) */
   margin-left: 0px;
-  border: 1px solid transparent;
+  border: 1px solid @color12;
   transition-property:
     background-color, border-left-color, border-right-color;
   transition-duration: 0.1s;
@@ -138,6 +138,14 @@ tooltip {
 
 #custom-notification {
   color: @selected;
+}
+
+#custom-screen_rec_indicator {
+  min-width: 12px;
+  margin-left: 8.75px;
+  font-size: 17px;
+  color: #f23663;
+  margin: 0 7.5px;
 }
 
 #pulseaudio-slider {

@@ -10,6 +10,7 @@
     "mpris"
   ],
   "modules-right": [
+    "custom/screen_rec_indicator",
     "clock",
     "group/network",
     "group/hardware",
@@ -175,6 +176,7 @@
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
   },
   "backlight": {
+    "tooltip": false,
     "format": "<b>{icon}</b> {percent}%",
     "format-icons": [
       "󰃞",
@@ -216,6 +218,12 @@
     "drawer": {
       "transition-duration": 400
     }
+  },
+  "custom/screen_rec_indicator": {
+    "on-click": "$HOME/.local/bin/myScripts/screenshots/screenrecord.sh",
+    "exec": "$HOME/.local/bin/myScripts/screenshots/screen_recording.sh",
+    "signal": 8,
+    "return-type": "json"
   },
   "custom/notification": {
     "tooltip": true,
