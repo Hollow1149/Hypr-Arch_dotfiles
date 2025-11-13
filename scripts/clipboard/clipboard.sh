@@ -5,6 +5,11 @@
 # CTRL Del to delete an entry
 # ALT Del to wipe clipboard contents
 
+if pgrep -x rofi >/dev/null; then
+  pkill -x rofi
+  exit 0
+fi
+
 while true; do
   result=$(
     rofi -dmenu \
@@ -33,6 +38,9 @@ while true; do
     ;;
   11)
     cliphist wipe
+    ;;
+  *)
+    exit
     ;;
   esac
 done
