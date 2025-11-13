@@ -16,15 +16,7 @@ FPS=60
 TYPE="any"
 DURATION=1.5
 BEZIER="0.4,0.2,0.4,1.0"
-SWWW_PARAMS="--transition-fps ${FPS} --transition-type ${TYPE} --transition-duration ${DURATION} --transition-bezier ${BEZIER}"
-
-# === INITIALIZE swww IF NEEDED ===
-if command -v swww &>/dev/null; then
-  swww query || swww init
-else
-  notify-send -u critical "❌ swww is not installed."
-  exit 1
-fi
+SWWW_PARAMS=(--transition-fps "${FPS}" --transition-type "${TYPE}" --transition-duration "${DURATION}" --transition-bezier "${BEZIER}")
 
 # Thumbnail generation
 generate_thumbnail() {
@@ -41,11 +33,6 @@ generate_thumbnail() {
     fi
   done <"$listCache"
 }
-
-if ! command -v convert &>/dev/null; then
-  notify-send -u critical "❌ ImageMagick is required for thumbnail generation."
-  exit 1
-fi
 
 # === COLLECT WALLPAPERS ===
 if [[ ! -f "$listCache" || $(find "$wallpaperDir" -type f -newer "$listCache" | wc -l) -gt 0 ]]; then
@@ -90,27 +77,29 @@ menu() {
 
 # === WALLPAPER SETTER ===
 executeCommand() {
-  swww img "$1" $SWWW_PARAMS
+  swww img "$1" "${SWWW_PARAMS[@]}"
   ln -sf "$1" "${wallpaperDir}/current_wallpaper"
 
   if command -v wallust &>/dev/null; then
     if ! WALLUST_OUTPUT=$(wallust run "$1" 2>&1); then
       notify-send -u low "⚠️ Wallust encountered an error: $WALLUST_OUTPUT"
     fi
+
+    killall waybar 2>/dev/null
+
+    while pgrep -x waybar >/dev/null; do
+      sleep 0.1
+    done
+
+    waybar &
+
+    if command -v swaync-client &>/dev/null; then
+      swaync-client -R -rs
+    fi
   else
     notify-send -u critical "Wallust is not installed."
   fi
 
-  if command -v hyprpanel &>/dev/null; then
-    hyprpanel -q
-    sleep 0.25
-    if pgrep -x hyprpanel >/dev/null; then
-      pkill -x hyprpanel
-      sleep 0.1
-    fi
-    hyprpanel &
-    disown
-  fi
 }
 
 # === MAIN FUNCTION ===
@@ -137,7 +126,7 @@ main() {
 }
 
 # === KILL RUNNING ROFI IF OPEN ===
-if pidof rofi >/dev/null; then
+if pidof rofi 2>/dev/null; then
   pkill rofi
   exit 0
 fi
