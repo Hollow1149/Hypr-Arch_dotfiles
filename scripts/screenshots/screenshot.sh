@@ -13,7 +13,8 @@ fi
 pkill slurp && exit 0
 
 MODE="${1:-smart}"
-PROCESSING="${2:-slurp -w 0 -d}"
+EDIT="${2}"
+PROCESSING="${3:-slurp -w 0 -d}"
 
 get_rectangles() {
   local active_workspace=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .activeWorkspace.id')
@@ -23,24 +24,24 @@ get_rectangles() {
 
 # Screenshot modes
 case "$MODE" in
-region)
+--region)
   hyprpicker -n -r -z -d &
   PICKER_PID=$!
   sleep 0.1
   SELECTION=$(slurp -w 0 -d 2>/dev/null)
   kill $PICKER_PID 2>/dev/null
   ;;
-window)
+--window)
   hyprpicker -n -r -z -d &
   PICKER_PID=$!
   sleep 0.1
   SELECTION=$(get_rectangles | slurp -w 0 -d -r 2>/dev/null)
   kill $PICKER_PID 2>/dev/null
   ;;
-fullscreen)
+--fullscreen)
   SELECTION=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | "\(.x),\(.y) \((.width / .scale) | floor)x\((.height / .scale) | floor)"')
   ;;
-smart | *)
+--smart)
   RECTS=$(get_rectangles)
   hyprpicker -n -r -z -d &
   PICKER_PID=$!
@@ -71,19 +72,47 @@ smart | *)
     fi
   fi
   ;;
+*)
+  echo "Usage: "
+  echo "--fullscreen #Fullscreen Screenshot"
+  echo "--region     #Capture a Region"
+  echo "--window     #Capture a window"
+  echo "--smart      #Smart screenshot"
+  echo "with --edit  #Edit using sally"
+  ;;
 esac
 
 [ -z "$SELECTION" ] && exit 0
 
-if [[ $PROCESSING == "slurp -w 0 -d" ]]; then
-  grim -g "$SELECTION" - |
-    satty --filename - \
-      --output-filename "$FULL_PATH" \
-      --early-exit \
-      --actions-on-enter save-to-clipboard \
-      --save-after-copy \
-      --copy-command 'wl-copy'
-  kill $PICKER_PID 2>/dev/null
-else
-  grim -g "$SELECTION" - | wl-copy
-fi
+satty_cmd=(
+  satty
+  --filename -
+  --output-filename "$FULL_PATH"
+  --early-exit
+  --actions-on-enter save-to-clipboard
+  --save-after-copy
+  --copy-command 'wl-copy'
+)
+
+grim_cmd=(
+  grim
+  -g "$SELECTION"
+)
+
+case "$EDIT" in
+--edit)
+  "${grim_cmd[@]}" - | "${satty_cmd[@]}"
+  kill "$PICKER_PID" 2>/dev/null
+  ;;
+*)
+  "${grim_cmd[@]}" "$FULL_PATH"
+  kill "$PICKER_PID" 2>/dev/null
+  if [ -f "$FULL_PATH" ]; then
+    wl-copy <"$FULL_PATH" &&
+      notify-send -i "$FULL_PATH" "📸 Screenshot Taken" "$FILENAME copied to clipboard."
+  else
+    notify-send -u critical "Error" "Failed to capture screenshot."
+    exit 1
+  fi
+  ;;
+esac
