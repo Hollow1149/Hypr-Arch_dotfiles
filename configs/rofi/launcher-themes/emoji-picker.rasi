@@ -1,4 +1,4 @@
-/* config - Launcher */
+/* config - Emojij Picker */
 
 configuration {
     show-icons:                 true;
@@ -12,9 +12,9 @@ configuration {
 /* Main Window ------------------------------------------------ */
 window {
     width:                       40%;
-    height:                      46%;
+    height:                      49%;
     margin:                      0.5%;
-    padding:                     0%;
+    padding:                     1% 0.5%;
     anchor:                      west;
     location:                    south east;
 }
@@ -27,7 +27,6 @@ mainbox {
 
     spacing:                     1.25%;
     margin:                      0%;
-    border:                      2px;
     border-color:                @selected;
     border-radius:               4.5% 2.5%; 
     padding:                     1% 0.5%;
@@ -36,16 +35,12 @@ mainbox {
 /* Inputbar --------------------------------------------------- */
 inputbar {
     children:                    [ "entry" ];
-
-    border:                      1px;
     border-color:                @selected;
-    border-radius:               1.15%;
-    background-color:            @shade-bg;
-    text-color:                  @text;
-
-    spacing:                     0.625%;
-    margin:                      0% 13%;
-    padding:                     1.5%;
+    background-color:            transparent;
+    padding:                     7px 6px;
+    orientation:                 horizontal;
+    border:                      2px;
+    border-radius:               4.5% 2.5%;
 }
 
 textbox-prompt-colon {
@@ -57,11 +52,14 @@ textbox-prompt-colon {
 
 /* Entry input ------------------------------------------------ */
 entry {
-    background-color:            transparent;
-    text-color:                  inherit;
     cursor:                      inherit;
-    placeholder:                 " ";
+    placeholder:                 "Search";
     placeholder-color:           inherit;
+    expand:                      true;
+    border-radius:               4.5% 2.5%;
+    background-color:            black / 48%;
+    text-color:                  @text;
+    padding:                     16px;
 }
 
 /* Listview --------------------------------------------------- */

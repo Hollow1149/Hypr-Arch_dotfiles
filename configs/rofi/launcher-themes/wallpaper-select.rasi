@@ -3,20 +3,18 @@
 configuration {
     modi:                        "drun";
     show-icons:                  true;
-  	drun-display-format:         "{name}";
-    hover-select:                true;
     font:                        "JetBrains Mono Nerd Font 10";
 }
 /* Config and colors ----------------------------------------------- */
 
-@import "~/.config/rofi/launcher-themes/default.rasi"
+@import "default.rasi"
 
 /* Main Window ------------------------------------------------ */
 window {
     width:                       70%;
-    height:                      31%;
-    margin:                      0.4%;
-    padding:                     0px;
+    height:                      32%;
+    margin:                      0.5%;
+    padding:                     1% 0.5%;
     anchor:                      north;
     location:                    south;
 }
@@ -25,13 +23,9 @@ window {
 mainbox {
     children:                    [ "listview" ];
     background-color:            transparent;
-    border:                      0px;
-    border-color:                @selected;
-    border-radius:               4.5% 2.5%;
 
-    spacing:                     24px;
-    margin:                      0px;
-    padding:                     10px 10px;
+    spacing:                     1.25%;
+    padding:                     0.7% 0.7%;
 }
 
 /* ---- List ---- */
@@ -47,11 +41,7 @@ listview {
     fixed-columns:               true;
 
     background-color:           transparent;
-    text-color:                 @foreground;
-
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     0px;
+    text-color:                 @text;
 }
 
 /* Elements --------------------------------------------------- */
@@ -59,12 +49,9 @@ element {
     cursor:                      pointer;
     border-radius:               36px;
     background-color:            transparent;
-    text-color:                  @foreground;
     orientation:                 vertical;
 
     spacing:                     0px;
-    margin:                      0px;
-    padding:                     0px;
 }
 
 element-icon {

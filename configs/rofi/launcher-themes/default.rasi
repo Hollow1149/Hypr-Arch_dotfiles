@@ -6,7 +6,7 @@
     active:                      @selected-urgent-background; // Window activated
     urgent:                      @selected-normal-background; // When hovering the activated window (maybe more?)
 
-    text-selected:               @background;
+    text-selected:               @text-selected;
     text:                        @foreground;
 
     shade-shadow:                white / 6%;
@@ -18,7 +18,7 @@ window {
     fullscreen:                  false;
     
     cursor:                      "default";
-    background-color:            black / 22%;
+    background-color:            @background;
     border-radius:               4.5% 2.5%;
     border:                      0px;
     border-color:                @selected;
@@ -34,7 +34,7 @@ element alternate.normal {
 element selected.normal {
     background-color:            @shade-bg;
     text-color:                  white;
-    border:                      2px solid;
+    border:                      0px;
     border-color:                @selected;
 }
 
