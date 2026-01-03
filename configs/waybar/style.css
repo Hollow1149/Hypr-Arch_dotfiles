@@ -14,7 +14,7 @@ window#waybar {
 
 tooltip {
   font-family: inherit;
-  background: alpha(@bakgrnd, 0.7);
+  background: alpha(@bakgrnd, 0.8);
   /* tooltip background */
   border: 1px solid @color13;
   /* tooltip border size and color */
@@ -22,7 +22,7 @@ tooltip {
   /* tooltip rounded corners */
 }
 
-#workspaces button,
+/* #workspaces button, */
 #window,
 #mpris,
 #bluetooth,
@@ -37,10 +37,10 @@ tooltip {
 #custom-notification {
   /*text-shadow: 1px 1px 2px rgb(0, 0, 0);*/
   /* text shadow, offset-x | offset-y | blur-radius | color */
-  background: alpha(@bakgrnd, 0.5);
+  background: alpha(@bakgrnd, 0.75);
   /*#15161e default*/
   /* background color */
-  margin: 2px 4px 2px 4px;
+  margin: 2px 4px 0px 4px;
   /* empty spaces around */
   padding: 1px 10px;
   /* extend pill size, vertical then horizontal */
@@ -61,40 +61,44 @@ tooltip {
 }**/
 
 #workspaces {
-  padding: 0 3px;
+  margin: 2px 4px 2px 4px;
+  padding: 1px 4px;
   /* remove padding around workspace module */
-  color: @color2;
+  background-color: alpha(@bakgrnd, 0.75);
+  border-radius: 10px;
 }
 
 #workspaces button {
+  color: @color4;
+  font-size: 10px;
+  box-shadow: none;
+  text-shadow: none;
   padding: 4px 4px 4px 4px;
   /* fit with pill padding, 0px for not haveing duped vertical padding, 4px to make a square (4px value from module padding: ...#clock {padding >>4px<< 10px}) */
-  margin-left: 0px;
-  border: 1px solid @color12;
+  margin-left: 3px;
+  margin-right: 3px;
+  border: 0px solid @color12;
+  animation: gradient_f 20s ease-in infinite;
+  transition: all 0.3s cubic-bezier(.55, -0.68, 0.48, 1.682);
   transition-property:
     background-color, border-left-color, border-right-color;
-  transition-duration: 0.1s;
-  font-size: 10px;
-  color: @color4;
-}
-
-#workspaces button.empty {
-  padding: 0px 10px;
-}
-
-#workspaces button:first-child {
-  margin-left: 0;
 }
 
 #workspaces button.active {
   /* active workspace */
-  background: @color6;
-
+  color: @color14;
+  background: transparent;
+  box-shadow: none;
+  text-shadow: none;
 }
 
 #workspaces button:hover {
-  background: @selected;
   /* hovered workspace color */
+  background-color: alpha(@color6, 0.4);
+}
+
+#workspace button.urgent {
+  color: #FF0000;
 }
 
 @keyframes blink {
@@ -129,7 +133,7 @@ tooltip {
 }
 
 #window {
-  color: @color1;
+  color: @color7;
 }
 
 #clock {
