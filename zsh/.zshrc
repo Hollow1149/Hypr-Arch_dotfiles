@@ -4,7 +4,6 @@
 
 export FONTCONFIG_PATH=/etc/fonts
 export PATH="$HOME/.local/bin:$PATH"
-export QT_QPA_PLATFORMTHEME=qt6ct
 export PGHOST=~/Applications/PostgreSQL_db/
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -125,14 +124,10 @@ function yazi() {
 ###############
 ### Aliases ###
 ###############
-alias ppd-start="sudo systemctl unmask power-profiles-daemon.service && sudo systemctl stop auto-cpufreq && sudo  systemctl enable --now power-profiles-daemon.service"
-alias ppd-stop="sudo systemctl disable --now power-profiles-daemon.service"
-alias auto-start="sudo systemctl stop power-profiles-daemon.service && sudo systemctl enable --now auto-cpufreq"
-alias auto-stop="sudo systemctl disable --now auto-cpufreq"
 alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/Artemis/Applications/PostgreSQL_db/logfile start"
 alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
 alias lsda="lsd -A"
-alias superparu="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --paru"
+alias superyay="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --yay"
 alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
 alias gemini="cd ~/Projects/cllmm/gemini && command gemini"
 
