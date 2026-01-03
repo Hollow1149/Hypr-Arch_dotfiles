@@ -14,7 +14,7 @@ mkdir -p "$thumbDir"
 # Transition settings
 FPS=60
 TYPE="any"
-DURATION=1.5
+DURATION=1
 BEZIER="0.4,0.2,0.4,1.0"
 SWWW_PARAMS=(--transition-fps "${FPS}" --transition-type "${TYPE}" --transition-duration "${DURATION}" --transition-bezier "${BEZIER}")
 
@@ -24,12 +24,12 @@ generate_thumbnail() {
     if [[ "$pic" != *.gif ]]; then
       filename="$(basename "$pic")"
       thumb="$thumbDir/${filename}.png"
-      [[ ! -f "$thumb" ]] && convert "$pic" -resize 500 "$thumb" 2>/dev/null
+      [[ ! -f "$thumb" ]] && magick "$pic" -thumbnail 500 "$thumb" 2>/dev/null
     else
       # For GIFs, create a thumbnail from the first frame
       filename="$(basename "$pic")"
       thumb="$thumbDir/${filename}.png"
-      [[ ! -f "$thumb" ]] && convert "$pic[0]" -resize 500 "$thumb" 2>/dev/null
+      [[ ! -f "$thumb" ]] && magick "$pic[0]" -thumbnail 500 "$thumb" 2>/dev/null
     fi
   done <"$listCache"
 }
@@ -103,7 +103,14 @@ executeCommand() {
 }
 
 # === MAIN FUNCTION ===
-main() {
+openMenu() {
+
+  # === KILL RUNNING ROFI IF OPEN ===
+  if pidof rofi 2>/dev/null; then
+    pkill rofi
+    exit 0
+  fi
+
   choice=$(menu | $rofiCommand)
 
   [[ -z "$choice" ]] && exit 0
@@ -125,11 +132,19 @@ main() {
   exit 1
 }
 
-# === KILL RUNNING ROFI IF OPEN ===
-if pidof rofi 2>/dev/null; then
-  pkill rofi
-  exit 0
-fi
-
 # === START SCRIPT ===
-main
+case "$1" in
+--set)
+  shift
+  executeCommand "$1"
+  ;;
+--menu)
+  openMenu
+  ;;
+*)
+  echo "Usage: "
+  echo " $0 --menu  #Open wallpaper menu"
+  echo " $0 --set FILE  #Set wallpaper"
+  exit 1
+  ;;
+esac
