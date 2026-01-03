@@ -4,7 +4,7 @@
 
 [mgr]
 sort_by = "natural"
-sort_sensitive = true
+sort_sensitive = false
 sort_dir_first = true
 show_hidden = false
 show_symlink = false
@@ -45,11 +45,10 @@ prepend_previewers = [
 image_options = [
   { run = 'loupe "$@"', orphan = true, desc = "View in Loupe" },
   { run = 'gimp "$@"', orphan = true, desc = "Edit in GIMP" },
-  { run = 'swww img "$@" --transition-fps 60 --transition-type any --transition-duration 3 --transition-bezier 0.4,0.2,0.4,1.0 && wallust run "$@"', orphan = true, desc = "Set as Wallpaper" },
-  { run = 'exiftool -all -G -s "$@" | bat --paging always ', block = true, desc = "Show EXIF" },
+  { run = '$HOME/.local/bin/myScripts/wallpaperRelated/wallpaperSelect.sh --set "$@"', orphan = true, desc = "Set as Wallpaper" },
 ]
 
-video_options = [{ run = 'vlc "$@"', orphan = true, desc = "Open in VLC" }]
+#video_options = [{ run = 'vlc "$@"', orphan = true, desc = "Open in VLC" }]
 
 [open]
 prepend_rules = [
@@ -58,5 +57,4 @@ prepend_rules = [
     "video_options",
   ] },
   { mime = "image/*", use = "image_options" },
-  { mime = "video/*", use = "video_options" },
 ]
