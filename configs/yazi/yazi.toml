@@ -43,16 +43,18 @@ prepend_previewers = [
 [opener]
 
 image_options = [
-  { run = 'loupe "$@"', orphan = true, desc = "View in Loupe" },
-  { run = 'gimp "$@"', orphan = true, desc = "Edit in GIMP" },
-  { run = '$HOME/.local/bin/myScripts/wallpaperRelated/wallpaperSelect.sh --set "$@"', orphan = true, desc = "Set as Wallpaper" },
+  { run = 'uwsm-app -- loupe "$@"', orphan = true, desc = "View in Loupe" },
+  { run = 'uwsm-app -- gimp "$@"', orphan = true, desc = "Edit in GIMP" },
+  { run = 'uwsm-app -- $HOME/.local/bin/myScripts/wallpaperRelated/wallpaperSelect.sh --set "$@"', orphan = true, desc = "Set as Wallpaper" },
 ]
 
-#video_options = [{ run = 'vlc "$@"', orphan = true, desc = "Open in VLC" }]
+video_options = [
+  { run = 'uwsm-app -- vlc "$@"', orphan = true, desc = "Open in VLC" },
+]
 
 [open]
 prepend_rules = [
-  { name = "*.gif", use = [
+  { mime = "image/gif", use = [
     "image_options",
     "video_options",
   ] },
