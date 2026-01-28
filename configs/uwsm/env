@@ -3,6 +3,7 @@ export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=Hyprland
 export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_ICON_THEME=Breeze
 
 #Environment-variables needed for Nvidia GPU
 export LIBVA_DRIVER_NAME= nvidia
