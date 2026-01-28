@@ -13,7 +13,11 @@ fi
 
 case "$1" in
 --title)
-  echo "$title"
+  if [ ${#title} -gt 22 ]; then
+    echo "${title:0:20}.."
+  else
+    echo "$title"
+  fi
   ;;
 --artist)
   echo "$artist"
