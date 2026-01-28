@@ -1,15 +1,30 @@
 #!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+get_thumb_path() {
+  echo "${thumbDir}/${1//\//_}.png"
+}
+
 # For Hyprland + swww
 
 # === CONFIGURATION ===
 # Directories
 wallpaperDir="$HOME/Pictures/Wallpapers"
-themesDir="$HOME/.config/rofi/launcher-themes/"
+themesDir="$HOME/.config/rofi/launcher-themes"
 cacheDir="$HOME/.cache/wallpaper-selector"
 listCache="$cacheDir/wallpaper_list.txt"
 thumbDir="$cacheDir/thumbnails"
+currentLink="$cacheDir/current_wallpaper"
 
 mkdir -p "$thumbDir"
+
+for cmd in rofi swww magick matugen; do
+  command -v "$cmd" >/dev/null || {
+    notify-send -u critical "Missing dependency: $cmd"
+    exit 1
+  }
+done
 
 # Transition settings
 FPS=60
@@ -20,47 +35,64 @@ SWWW_PARAMS=(--transition-fps "${FPS}" --transition-type "${TYPE}" --transition-
 
 # Thumbnail generation
 generate_thumbnail() {
-  while read -r pic; do
-    if [[ "$pic" != *.gif ]]; then
-      filename="$(basename "$pic")"
-      thumb="$thumbDir/${filename}.png"
-      [[ ! -f "$thumb" ]] && magick "$pic" -thumbnail 500 "$thumb" 2>/dev/null
-    else
-      # For GIFs, create a thumbnail from the first frame
-      filename="$(basename "$pic")"
-      thumb="$thumbDir/${filename}.png"
-      [[ ! -f "$thumb" ]] && magick "$pic[0]" -thumbnail 500 "$thumb" 2>/dev/null
-    fi
-  done <"$listCache"
+
+  export thumbDir
+  <"$listCache" xargs -P "$(nproc)" -I{} bash -c '
+  pic="{}"
+  # Pure bash replace: ${variable//search/replace}
+  thumb="${thumbDir}/${pic//\//_}.png"
+
+  [[ -f "$thumb" ]] && exit 0
+  
+  if [[ "$pic" == *.gif ]]; then
+    magick "$pic[0]" -thumbnail 500 "$thumb"
+  else
+    magick "$pic" -thumbnail 500 "$thumb"
+  fi
+  '
 }
 
 # === COLLECT WALLPAPERS ===
-if [[ ! -f "$listCache" || $(find "$wallpaperDir" -type f -newer "$listCache" | wc -l) -gt 0 ]]; then
-  find -L "$wallpaperDir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | sort >"$listCache"
+if [[ ! -f "$listCache" || "$wallpaperDir" -nt "$listCache" ]]; then
+  find -L "$wallpaperDir" -type f \
+    \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) |
+    sort >"$listCache"
 
-  generate_thumbnail &
-fi
+  # Clean up Logic
+  # 1. Get current thumbnails (filenames only)
+  # 2. Get expected thumbnails (transform listCache paths to filenames)
+  # 3. 'comm -23' shows files that exist but shouldn't.
+  comm -23 <(find "$thumbDir" -maxdepth 1 -name "*.png" -printf "%f\n" | sort) \
+    <(sed 's|/|_|g' "$listCache" | sed 's/$/.png/' | sort) |
+    while read -r trash; do
+      rm "${thumbDir}/${trash}"
+    done
+  # End of cleanup logic
 
-# Remove thumbnail for non-existent wallpaper
-if [[ -f "$listCache" ]]; then
-  find "$thumbDir" -name "*.png" | while read -r thumb; do
-    thumb_name=$(basename "$thumb" .png)
-    if ! grep -q "$thumb_name" "$listCache"; then
-      rm -rf "$thumb"
-    fi
-  done
+  generate_thumbnail
 fi
 
 mapfile -t PICS <"$listCache"
 
+if [[ ${#PICS[@]} -eq 0 ]]; then
+  notify-send -u critical "No wallpapers found in $wallpaperDir"
+  exit 1
+fi
+
 # Random wallpaper logic
 randomPreviewImage="$HOME/Pictures/Others/.question_unown.png"
-randomNumber=$(((RANDOM + $(date +%s) + $$) % ${#PICS[@]}))
+randomNumber=$((RANDOM % ${#PICS[@]}))
 randomPicture="${PICS[$randomNumber]}"
 randomChoice="[${#PICS[@]}] Random"
 
 # Rofi command
-rofiCommand="rofi -show -dmenu -theme ${themesDir}/wallpaper-select.rasi"
+rofiCommand=(
+  rofi
+  -show
+  -dmenu
+  -theme "${themesDir}/wallpaper-select.rasi"
+  -format i
+)
 
 # === DISPLAY ROFI MENU ===
 menu() {
@@ -70,36 +102,33 @@ menu() {
     filename="$(basename "$pic")"
     name="${filename%.*}"
 
-    thumb="$thumbDir/${filename}.png"
-    printf "%s\x00icon\x1f%s\n" "$name" "$thumb"
+    thumb="$(get_thumb_path "$pic")"
+    printf "%s\x00icon\x1f%s\x00info\x1f%s\n" "$name" "$thumb" "$pic"
   done
 }
 
 # === WALLPAPER SETTER ===
 executeCommand() {
-  swww img "$1" "${SWWW_PARAMS[@]}"
-  ln -sf "$1" "${wallpaperDir}/current_wallpaper"
+  local wp="$1"
 
-  if command -v wallust &>/dev/null; then
-    if ! WALLUST_OUTPUT=$(wallust run "$1" 2>&1); then
-      notify-send -u low "⚠️ Wallust encountered an error: $WALLUST_OUTPUT"
-    fi
+  # Set wallpaper
+  swww img "$wp" "${SWWW_PARAMS[@]}"
+  ln -sf "$wp" "$currentLink"
 
-    killall waybar 2>/dev/null
-
-    while pgrep -x waybar >/dev/null; do
-      sleep 0.1
-    done
-
-    waybar &
-
-    if command -v swaync-client &>/dev/null; then
-      swaync-client -R -rs
-    fi
-  else
-    notify-send -u critical "Wallust is not installed."
+  if ! MATUGEN_OUTPUT=$(matugen --mode dark image "$wp" 2>&1); then
+    notify-send -u low "⚠️ Matugen encountered an error: $MATUGEN_OUTPUT"
+    echo "$MATUGEN_OUTPUT"
   fi
 
+  if pgrep -x waybar >/dev/null; then
+    pkill -SIGUSR2 waybar
+  else
+    uwsm-app -- waybar &
+  fi
+
+  if command -v swaync-client &>/dev/null; then
+    swaync-client -R -rs
+  fi
 }
 
 # === MAIN FUNCTION ===
@@ -111,35 +140,50 @@ openMenu() {
     exit 0
   fi
 
-  choice=$(menu | $rofiCommand)
+  choice_index=$(menu | "${rofiCommand[@]}")
 
-  [[ -z "$choice" ]] && exit 0
+  # Check if choice is empty (ESC pressed)
+  [[ -z "$choice_index" ]] && exit 0
 
-  if [[ "$choice" == "$randomChoice" ]]; then
+  # The random entry is the first item printed (index 0)
+  # The wallpapers start at index 1
+  if [[ "$choice_index" -eq 0 ]]; then
     executeCommand "$randomPicture"
     exit 0
   fi
 
-  for file in "${PICS[@]}"; do
-    filename=$(basename "$file")
-    if [[ "${filename%.*}" == "$choice" ]]; then
-      executeCommand "$file"
-      exit 0
-    fi
-  done
+  # The real array index is (rofi_index - 1) because "Random" took spot #0
+  real_index="$((choice_index - 1))"
 
-  notify-send -u critical "❌ Selected image not found."
-  exit 1
+  # Fetch the file directly from the array using the Index.
+  # No searching, no loops, no ambiguity.
+  selected_file="${PICS[$real_index]}"
+
+  if [[ -f "$selected_file" ]]; then
+    executeCommand "$selected_file"
+  else
+    notify-send -u critical "Error: Image not found."
+    exit 1
+  fi
 }
 
 # === START SCRIPT ===
 case "$1" in
 --set)
   shift
+  # Safety Check
+  if [[ -z "${1:-}" ]]; then
+    echo "Error: usage $0 --set <file>"
+    exit 1
+  fi
   executeCommand "$1"
   ;;
 --menu)
   openMenu
+  ;;
+--random)
+  executeCommand "$randomPicture"
+  exit 0
   ;;
 *)
   echo "Usage: "
