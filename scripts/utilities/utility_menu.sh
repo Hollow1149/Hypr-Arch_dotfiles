@@ -19,38 +19,42 @@ utilities=(
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Screenshot"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  ScreenRecord"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Hyprpicker"
-  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Toggle Waybar ON/OFF"
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Text OCR"
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Toggle Waybar"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  System Stats"
-  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Enable PowerTop (--auto-tune)"
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Enable PowerTop"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Toggle Night Light"
-  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Toggle Bluetooth ON/OFF"
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Toggle Bluetooth"
 )
 
 choice=$(printf "%s\n" "${utilities[@]}" | "${rofi_cmd[@]}")
 
 case "$choice" in
-*Screenshot*)
+*"Screenshot")
   screenshot
   ;;
-*ScreenRecord*)
-  " "
+*"ScreenRecord")
+  screenrecord
   ;;
-*Hyprpicker*)
+*"Hyprpicker")
   color_picker
   ;;
-*Waybar*)
+*"Waybar")
   toggle_waybar
   ;;
-*"System Stats"*)
+*"OCR")
+  text_ocr
+  ;;
+*"Stats")
   system_statistics
   ;;
-*PowerTop*)
+*"PowerTop")
   enable_powertop_powersaving
   ;;
-*Night*)
+*"Light")
   toggle_night_light
   ;;
-*Bluetooth*)
+*"Bluetooth")
   toggle_bluetooth
   ;;
 esac
