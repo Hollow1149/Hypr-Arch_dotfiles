@@ -41,7 +41,7 @@ inputbar {
     padding:                     7px 6px;
     orientation:                 horizontal;
     border:                      2px;
-    border-color:                @selected;
+    border-color:                @outline;
     border-radius:               4.5% 2.5%;
    /* background-image:            url("~/Pictures/Wallpapers/current_wallpaper", width); */
 }
@@ -52,7 +52,7 @@ textbox-help {
     content: " [CTRL DEL]  Delete \n [ALT DEL]   Wipe";
 
     border-radius:                 12px;
-    background-color:              @shade-bg;
+    background-color:              @inverse-surface-fifteen;
     text-color:                    white;
 
     margin:                        0px;
@@ -75,8 +75,8 @@ entry {
     
     expand:                      true;
     border-radius:               4.5% 2.5%;
-    background-color:            black / 48%;
-    text-color:                  @text;
+    background-color:            @surface-semi;
+    text-color:                  @on-surface;
 
     padding:                     16px;
     margin:                      0px;
@@ -102,7 +102,7 @@ listview {
     fixed-columns:               true;
     
     background-color:            transparent;
-    text-color:                  @text;
+    text-color:                  @on-surface;
 
 }
 

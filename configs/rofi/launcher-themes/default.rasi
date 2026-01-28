@@ -18,24 +18,24 @@ window {
     fullscreen:                  false;
     
     cursor:                      "default";
-    background-color:            @background;
+    background-color:            @surface-container-low-semi;
     border-radius:               4.5% 2.5%;
     border:                      0px;
-    border-color:                @selected;
+    border-color:                @outline;
 }
 
 /* Elements ----------------------------------------------------- */
 element normal.normal,
 element alternate.normal {
     background-color:            transparent;
-    text-color:                  @text;
+    text-color:                  @on-surface;
 }
 
 element selected.normal {
-    background-color:            @shade-bg;
+    background-color:            @inverse-surface-fifteen;
     text-color:                  white;
     border:                      0px;
-    border-color:                @selected;
+    border-color:                @outline;
 }
 
 element-text {
@@ -58,13 +58,13 @@ scrollbar {
     margin:                      0px 4px;
     handle-width:                8px;
     handle-color:                white;
-    background-color:            @shade-shadow;
+    background-color:            @inverse-surface-ten;
     border-radius:               4px;
 }
 
 /* Message ------------------------------------------------------ */
 message {
-    background-color:            @shade-bg;
+    background-color:            @inverse-surface-fifteen;
     border:                      1px solid;
     border-color:                transparent;
     border-radius:               12px;
@@ -74,12 +74,12 @@ error-message {
     padding:                     100px;
     border:                      0px solid;
     border-radius:               0px;
-    background-color:            black / 10%;
-    text-color:                  @text;
+    background-color:            @surface-container-lowest-semi;
+    text-color:                  @on-surface;
 }
 textbox {
     background-color:            transparent;
-    text-color:                  @text;
+    text-color:                  @on-surface;
     vertical-align:              0.5;
     horizontal-align:            0.5;
     highlight:                   none;

@@ -41,7 +41,7 @@ listview {
     fixed-columns:               true;
 
     background-color:           transparent;
-    text-color:                 @text;
+    text-color:                 @on-surface;
 }
 
 /* Elements --------------------------------------------------- */
