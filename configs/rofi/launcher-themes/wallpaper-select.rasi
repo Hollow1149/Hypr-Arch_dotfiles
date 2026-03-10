@@ -11,12 +11,12 @@ configuration {
 
 /* Main Window ------------------------------------------------ */
 window {
-    width:                       70%;
-    height:                      32%;
+    width:                       20%;
+    height:                      88%;
     margin:                      0.5%;
     padding:                     1% 0.5%;
     anchor:                      north;
-    location:                    south;
+    location:                    west;
 }
 
 /* Main Box --------------------------------------------------- */
@@ -30,15 +30,15 @@ mainbox {
 
 /* ---- List ---- */
 listview {
-    columns:                     4;
-    lines:                       1;
+    columns:                     1;
+    lines:                       4;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
     layout:                      vertical;
     reverse:                     false;
-    fixed-height:                true;
-    fixed-columns:               true;
+    fixed-height:                false;
+    fixed-columns:               false;
 
     background-color:           transparent;
     text-color:                 @on-surface;
