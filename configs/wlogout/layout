@@ -1,31 +1,30 @@
 {
-    "label" : "lock",
-    "action" : "sleep 0.25 && hyprlock",
-    "text" : "[L]ock",
-    "keybind" : "l"
+  "label": "lock",
+  "action": "sleep 0.25 && hyprlock",
+  "text": "[L]ock",
+  "keybind": "l"
 }
-{
-    "label" : "shutdown",
-    "action" : "sleep 0.25 && systemctl poweroff",
-    "text" : "[S]hutdown",
-    "keybind" : "s"
+ {
+  "label": "shutdown",
+  "action": "sleep 0.25 && systemctl poweroff",
+  "text": "[S]hutdown",
+  "keybind": "s"
 }
-{
-    "label" : "logout",
-    "action" : "sleep 0.25 && uwsm stop",
-    "text" : "L[o]gout",
-    "keybind" : "o"
+ {
+  "label": "logout",
+  "action": "sleep 0.25 && uwsm stop",
+  "text": "L[o]gout",
+  "keybind": "o"
 }
-{
-    "label" : "reboot",
-    "action" : "sleep 0.25 && systemctl reboot",
-    "text" : "[R]eboot",
-    "keybind" : "r"
+ {
+  "label": "reboot",
+  "action": "sleep 0.25 && systemctl reboot",
+  "text": "[R]eboot",
+  "keybind": "r"
 }
-{
-    "label" : "sleep",
-    "action" : "sleep 0.25 && systemctl suspend",
-    "text" : "Slee[p]",
-    "keybind" : "p"
+ {
+  "label": "sleep",
+  "action": "notify-send -u normal 'Sleep Not Supported Yet.' 'On Your Nvidia GPU' ",
+  "text": "Slee[p]",
+  "keybind": "p"
 }
-
