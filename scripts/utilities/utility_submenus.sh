@@ -16,6 +16,30 @@ screenrecord_options=(
   "<b><span font='Font Awesome 7 Free' size='large'></span></b> Stop Recording"
 )
 
+shader_options=("Off")
+
+shader_menu() {
+  while IFS= read -r shader; do
+    [[ -n "$shader" ]] && shader_options+=("$shader")
+  done < <(hyprshade ls)
+
+  shader_choice=$(printf "%s\n" "${shader_options[@]}" | sed 's/^[[:space:]]*//' | "${rofi_cmd[@]}")
+
+  echo "$shader_choice"
+
+  if [[ -z "$shader_choice" ]]; then
+    exit 0
+  fi
+
+  if [[ "$shader_choice" == "Off" ]]; then
+    hyprshade off
+    hyprctl reload
+  else
+    hyprctl reload
+    hyprshade on "$shader_choice"
+  fi
+}
+
 screenshot_menu() {
   screenshot_choice=$(printf "%s\n" "${screenshot_options[@]}" | "${rofi_cmd[@]}")
 
@@ -47,19 +71,19 @@ screenrecord_menu() {
   screenrecord_choice=$(printf "%s\n" "${screenrecord_options[@]}" | "${rofi_cmd[@]}")
 
   case "$screenrecord_choice" in
-  *"No Audio and No Webcam")
+  "No Audio and No Webcam"*)
     sleep 0.5 &&
       "$HOME/.local/bin/myScripts/screenshots/screenrecord.sh"
     ;;
-  *"Desktop Audio")
+  "With Desktop Audio"*)
     sleep 0.5 &&
       "$HOME/.local/bin/myScripts/screenshots/screenrecord.sh" --with-desktop-audio
     ;;
-  *"Desktop + Mic Audio")
+  "With Desktop + Mic Audio"*)
     sleep 0.5 &&
       "$HOME/.local/bin/myScripts/screenshots/screenrecord.sh" --with-desktop-audio --with-microphone-audio
     ;;
-  *"Desktop + Mic Audio + Webcam")
+  "With Desktop + Mic + Webcam"*)
     sleep 0.5 &&
       "$HOME/.local/bin/myScripts/screenshots/screenrecord.sh" --with-desktop-audio --with-microphone-audio --with-webcam
     ;;
