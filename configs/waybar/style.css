@@ -9,7 +9,6 @@
 
 window#waybar {
   background: transparent;
-  /* main window transparent background */
 }
 
 tooltip {
@@ -18,35 +17,35 @@ tooltip {
   /* tooltip background */
   border: 1px solid @selected;
   /* tooltip border size and color */
-  border-radius: 10px;
+  border-radius: 5px;
   /* tooltip rounded corners */
 }
 
-/* #workspaces button, */
+/* .modules-right { */
+/*     padding: 1px 4px; */
+/*     margin: 2px 4px 0px 4px; */
+/*     border-radius:7px; */
+/*     background: alpha(@surface_container, 0.9); */
+/* } */
+
 #window,
 #mpris,
 #bluetooth,
 #network,
 #clock,
 #tray,
-#cpu,
-#battery,
-#memory,
-#backlight,
 #pulseaudio,
 #custom-notification {
   /*text-shadow: 1px 1px 2px rgb(0, 0, 0);*/
   /* text shadow, offset-x | offset-y | blur-radius | color */
-  background: alpha(@surface_container, 0.85);
+  background: alpha(@surface_container, 0.9);
   /*#15161e default*/
   /* background color */
-  margin: 2px 4px 0px 4px;
+  margin: 2px 4px 2px 4px;
   /* empty spaces around */
   padding: 1px 10px;
   /* extend pill size, vertical then horizontal */
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0);
-  /* pill background shadows */
-  border-radius: 10px;
+  border-radius: 7px;
   /*Default 5*/
   /* rounded corners */
   color: @on_surface;
@@ -63,11 +62,11 @@ tooltip {
 
 
 #workspaces {
-  margin: 2px 4px 2px 4px;
+  margin: 2px 4px 2px 5px;
   padding: 1px 4px;
   /* remove padding around workspace module */
-  background-color: alpha(@surface_container, 0.85);
-  border-radius: 10px;
+  background-color: alpha(@surface_container, 0.9);
+  border-radius: 7px;
 }
 
 #workspaces button {
@@ -95,7 +94,7 @@ tooltip {
 
 #workspaces button:hover {
   /* hovered workspace color */
-  background-color: alpha(@primary_container, 0.7);
+  background-color: alpha(@primary_container, 0.8);
 }
 
 #workspace button.urgent {
@@ -112,46 +111,77 @@ tooltip {
   color: @secondary;
 }
 
-#mpris {
-  color: @tertiary_fixed;
+#custom-privacy_dots {
+  background: alpha(@surface_container, 0.9);
+  margin: 2px 4px 2px 4px;
+  border-radius: 7px;
+  padding: 1px 10px;
+  font-size: 12px;
+  letter-spacing: 3px;
 }
 
 #custom-screen_rec_indicator {
+  background-color: alpha(@error_container, 0.5);
+  border-radius: 50px;
+  padding: 0px 5px;
+  margin: 2px 4px 2px 4px;
   min-width: 12px;
-  margin-left: 8.75px;
   font-size: 17px;
   color: @error;
-  margin: 0 7.5px;
 }
 
 #clock {
   color: @on_surface_variant;
-  background: alpha(@surface_variant, 0.85)
+  background: alpha(@surface, 0.9)
 }
 
-#tray {
-  background: transparent;
-  color: @on_primary_container;
-  border: 0px solid @outline;
+#mpris,
+#mpd {
+  background: alpha(@surface, 0.0);
+  color: @tertiary_fixed;
+  margin: 2px 4px 2px 4px;
+  padding: 1px 10px;
+  border-radius: 7px;
 }
 
-#network,
-#bluetooth {
-  border: 0px solid @outline;
+#players {
+  background: alpha(@surface_container_highest,0.9);
+  border-radius: 7px;
+  margin: 2px 4px 2px 4px;
+  padding: 1px 0px;
 }
 
 #battery,
-#backlight {
-  background: @secondary_container;
-  color: @on_secondary_container;
-}
-
+#backlight,
 #cpu,
 #memory {
-  background: @tertiary_container;
-  color: @on_tertiary_container;
+  background: alpha(@secondary_container, 0);
+  color: @on_secondary_container;
+  margin: 2px 4px 2px 4px;
+  padding: 1px 5px;
+  border-radius: 7px;
 }
 
+#hardware {
+  background: alpha(@surface_container_high, 0.9);
+  border-radius: 7px;
+  margin: 2px 4px 2px 4px;
+  padding: 1px 0px;
+}
+
+#tray,
+#network,
+#bluetooth {
+  background: alpha(@surface_container, 0);
+}
+
+#wireless
+{
+  background: alpha (@surface_container ,0.9);
+  margin: 2px 4px 2px 4px;
+  padding: 1px 10px;
+  border-radius: 7px;
+}
 
 #pulseaudio-slider {
   padding: 0;
@@ -181,5 +211,11 @@ tooltip {
 }
 
 #custom-notification {
+  background: alpha(@surface_container, 0.9);
+  margin: 2px 5px 2px 4px;
   color: @tertiary;
+}
+
+#pulseaudio {
+  background: alpha(@surface_container, 0.9);
 }
