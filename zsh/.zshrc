@@ -34,7 +34,8 @@ unsetopt autocd beep nomatch
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-
+bindkey '^/' undo
+bindkey ' '  magic-space
 
 ####################################
 ### Zinit Plugin Manager Options ###
@@ -86,6 +87,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -A --icon always $realpath' 
 
+#####################################
+### Open Command Buffer in EDITOR ###
+#####################################
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
 
 ##########################
 ### Shell Integrations ###
@@ -106,14 +113,12 @@ eval "$(zoxide init --cmd cd zsh)"
 ### oh-my-posh execution ###
 ############################
 
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/catppuccin_mocha.omp.json)"
-fi
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp/artemis-theme.omp.toml)"
 
 ##########################
 ### Yazi shell wrapper ###
 ##########################
-function yazi() {
+function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
@@ -131,13 +136,18 @@ alias superyay="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --y
 alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
 alias gemini="cd ~/Projects/cllmm/gemini && command gemini"
 
+#########################
+### NVM related stuff ###
+#########################
+
 export NVM_DIR="$HOME/.config/nvm"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-################################
-### Run Pokemon-colorscripts ###
-################################
-pokemon-colorscripts -r --no-title
+#######################################
+### Run Pokeget for pokemon sprites ###
+#######################################
+pokeget --hide-name random
 
 . "$HOME/.local/share/../bin/env"
