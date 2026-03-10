@@ -1,19 +1,21 @@
 {
   "layer": "top",
+  "position": "top",
   "height": 32,
   "reload_style_on_change": true,
   "modules-left": [
     "hyprland/workspaces",
-    "hyprland/window"
+    "hyprland/window",
+    "custom/privacy_dots"
   ],
   "modules-center": [
-    "mpris"
+    "clock"
   ],
   "modules-right": [
     "custom/screen_rec_indicator",
-    "clock",
+    "group/players",
     "group/hardware",
-    "group/network",
+    "group/wireless",
     "group/volume",
     "custom/notification"
   ],
@@ -39,29 +41,46 @@
     "show-special": true
   },
   "mpris": {
-    "format": "<span rise='2000'>{player_icon}  {title} - {artist}</span>",
-    "format-paused": "<span rise='2000'>{status_icon}  {title} - {artist}</span>",
-    "max-length": 35,
+    "format": "<span font=\"Font Awesome 7 Free\">{player_icon}</span> {title}",
+    "format-paused": "<span font=\"Font Awesome 7 Free\">{status_icon}</span> {title}",
+    "max-length": 20,
     "dynamic-len": 10,
-    // only the strings that match "spotify" will appear
-    //"player": "spotify",
-    "on-scroll-up": "playerctl --player=mpd volume 0.05+",
-    "on-scroll-down": "playerctl --player=mpd volume 0.05-",
     "player-icons": {
-      "default": "󰎈",
-      "mpd": "<b>󰝚</b>",
-      "vlc": "<span color='#E85E00'>󰕼</span>"
+      "default": "<b></b>",
+      "vlc": "<span color='#E85E00'><b>󰕼</b></span>",
+      "mpv": "<b></b>",
+      "firefox": ""
     },
     "status-icons": {
-      "paused": "󰏤",
-      "playing": "",
+      "paused": "",
+      "playing": "",
       "stopped": ""
-    }
+    },
+    "ignored-players": [
+      "mpd"
+    ]
+  },
+  "mpd": {
+    "format": "<span font=\"Font Awesome 7 Free\"><b>{stateIcon}</b></span> {title}",
+    "format-disconnected": "",
+    "format-stopped": "<span font=\"Font Awesome 7 Free\"><b>  </b></span>",
+    "max-length": 20,
+    "interval": 10,
+    "state-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "on-click": "mpc toggle",
+    "on-click-right": "mpc stop",
+    "on-scroll-up": "mpc prev",
+    "on-scroll-down": "mpc next",
+    "tooltip-format": "{title} {artist}"
   },
   "clock": {
-    "interval": 1,
-    "format": "<span size= '13pt'><b>時</b></span> {:%H:%M}",
-    "format-alt": "{:%A, %B %d, %Y (%R)}",
+    "interval": 60,
+    "format": "<span size='11pt' font=\"Orbitron Bold\"><b>{:%H : %M}</b></span>",
+    "format-alt": "<span><b>{:%A, %B %d, %Y (%R)}</b></span>",
+    // "format-alt": "{:%A, %B %d, %Y (%R)}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
@@ -83,33 +102,34 @@
     }
   },
   "tray": {
-    "icon-size": 15,
-    "spacing": 10
+    "icon-size": 13,
+    "spacing": 8
   },
   "cpu": {
-    "interval": 30,
-    "format": "<span size= '13pt'><b></b></span> {usage}%",
+    "interval": 10,
+    "format": "<span font=\"Font Awesome 7 Free\"><b></b></span> {usage}%",
     "max-length": 10
   },
   "memory": {
-    "interval": 30,
-    "format": "<span size='13pt'><b> </b></span>{used:0.1f} GB"
+    "interval": 10,
+    "format": "<span font=\"Font Awesome 7 Free\"><b></b></span> {used:0.1f} GB"
   },
   "pulseaudio": {
-    "format": "{icon} {volume}%{format_source}",
-    "format-bluetooth": "{volume}% {icon}",
-    "format-muted": "󰖁 0%{format_source}",
+    "format": "<span font=\"Font Awesome 7 Free\"><b>{icon}</b></span> {volume}%{format_source}",
+    "format-bluetooth": "{volume}% <span font=\"Font Awesome 7 Free\"><b>{icon}</b></span>",
+    "format-muted": "<span font=\"Font Awesome 7 Free\"><b></b></span> 0%{format_source}",
     "format-icons": {
-      "headphone": "󰋋",
-      "hands-free": "󰋋",
-      "headset": "󰋋",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
       "phone": "",
       "portable": "",
       "car": "",
       "default": [
-        "󰕿",
-        "󰖀",
-        "󰕾"
+        "",
+        "",
+        "",
+        ""
       ]
     },
     "scroll-step": 5,
@@ -131,9 +151,9 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span size='11pt'><b>{icon}</b></span> {capacity}%",
-    "format-charging": "<span size='11pt'><b>{icon}</b></span> {capacity}%",
-    "format-plugged": "<span size='11pt'><b>󰂄</b></span> {capacity}%",
+    "format": "<span size='12pt' font=\"Material Icons\"><b>{icon}</b></span> {capacity}%",
+    "format-charging": "<span size='12pt' font=\"Material Icons\"><b>{icon}</b></span> {capacity}%",
+    "format-plugged": "<span size='12pt' font=\"Material Icons\"><b>󰂄</b></span> {capacity}%",
     "format-icons": {
       "default": [
         "󰂎",
@@ -165,8 +185,8 @@
   },
   "network": {
     "format": "{ifname}",
-    "format-wifi": "<b>{icon}</b> {essid}",
-    "format-ethernet": "<b>󰈀</b> {ipaddr}/{cidr}/{gwaddr}",
+    "format-wifi": "<span font=\"Material Icons\"><b>{icon}</b></span> {essid}",
+    "format-ethernet": "<span font=\"Font Awesome 7 Free\"><b></b></span> {ipaddr}/{cidr}/{gwaddr}",
     "format-disconnected": "",
     "tooltip-format": "{ifname} via {gwaddr}",
     "tooltip-format-wifi": "{essid} ({gwaddr}) ({signalStrength}%)",
@@ -182,23 +202,31 @@
     ]
   },
   "bluetooth": {
-    "format": " {status}",
-    "format-connected": " {device_alias}",
-    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format": "<span font=\"Font Awesome 7 Free\"><b>{icon}</b></span> {status}",
+    "format-connected": "<span font=\"Font Awesome 7 Free\"><b>{icon}</b></span> {device_alias}",
+    "format-connected-battery": "<span font=\"Font Awesome 7 Free\"><b>{icon}</b></span> {device_alias} {device_battery_percentage}%",
     // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
     "tooltip-format": "{controller_alias} {controller_address}\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias} {controller_address}\n{num_connections} connected\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias} {device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias} {device_address} {device_battery_percentage}%"
+    "tooltip-format-enumerate-connected-battery": "{device_alias} {device_address} {device_battery_percentage}%",
+    "format-icons": ""
   },
   "backlight": {
     "tooltip": false,
-    "format": "<span size='13pt'><b>{icon}</b></span> {percent}%",
+    "format": "<span font=\"Material Icons\"><b>{icon}</b></span> {percent}%",
     "format-icons": [
       "󰃞",
       "󰃟",
       "󰃝",
       "󰃠"
+    ]
+  },
+  "group/players": {
+    "orientation": "horizontal",
+    "modules": [
+      "mpris",
+      "mpd"
     ]
   },
   "group/hardware": {
@@ -213,7 +241,7 @@
       "transition-duration": 400
     }
   },
-  "group/network": {
+  "group/wireless": {
     "orientation": "horizontal",
     "modules": [
       "tray",
@@ -235,6 +263,15 @@
       "transition-duration": 400
     }
   },
+  "custom/privacy_dots": {
+    "exec": "$HOME/.config/waybar/scripts/privacydots.sh",
+    "return-type": "json",
+    "interval": 3,
+    "format": "{text}",
+    "tooltip": true,
+    "escape": false,
+    "markup": "pango"
+  },
   "custom/screen_rec_indicator": {
     "on-click": "$HOME/.local/bin/myScripts/screenshots/screenrecord.sh",
     "exec": "$HOME/.local/bin/myScripts/screenshots/screen_recording.sh",
@@ -243,7 +280,7 @@
   },
   "custom/notification": {
     "tooltip": true,
-    "format": "<span size ='13pt'><b>{icon}</b></span>",
+    "format": "<span font=\"Material Icons\"><b>{icon}</b></span>",
     "format-icons": {
       "notification": "󱅫",
       "none": "󰂚",
