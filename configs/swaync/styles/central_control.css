@@ -1,7 +1,7 @@
 @define-color text @foreground;
-@define-color background-alt alpha(@color1, .4);
+@define-color background-alt alpha(@color1, .85);
 @define-color selected @color6;
-@define-color hover alpha(@selected, .4);
+@define-color hover alpha(@selected, .85);
 @define-color urgent @color2;
 
 * {
@@ -22,7 +22,7 @@
 /* CONTROL CENTER ------------------------------------------------------------------------ */
 
 .control-center {
-  background: alpha(@background, .55);
+  background: alpha(@background, .85);
   border-radius: 10px;
   border: 1px solid @selected;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, .6);
@@ -53,7 +53,7 @@
 }
 
 .control-center .notification-row .notification-background .notification>*:last-child>* .notification-action {
-  background: alpha(@selected, .6);
+  background: alpha(@selected, .85);
   color: @text;
   border-radius: 10px;
   margin: 6px;
