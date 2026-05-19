@@ -8,7 +8,7 @@ get_thumb_path() {
   echo "${thumbDir}/${1//\//_}.png"
 }
 
-# For Hyprland + swww
+# For Hyprland + awww
 
 # === CONFIGURATION ===
 # Directories
@@ -21,7 +21,7 @@ currentLink="$cacheDir/current_wallpaper"
 
 mkdir -p "$thumbDir"
 
-for cmd in rofi swww magick matugen; do
+for cmd in rofi awww magick matugen; do
   command -v "$cmd" >/dev/null || {
     notify-send -u critical "Missing dependency: $cmd"
     exit 1
@@ -33,7 +33,7 @@ FPS=60
 TYPE="any"
 DURATION=1
 BEZIER="0.4,0.2,0.4,1.0"
-SWWW_PARAMS=(--transition-fps "${FPS}" --transition-type "${TYPE}" --transition-duration "${DURATION}" --transition-bezier "${BEZIER}")
+AWWW_PARAMS=(--transition-fps "${FPS}" --transition-type "${TYPE}" --transition-duration "${DURATION}" --transition-bezier "${BEZIER}")
 
 # Thumbnail generation
 generate_thumbnail() {
@@ -83,7 +83,7 @@ fi
 
 # Random wallpaper logic
 randomPreviewImage="$HOME/Pictures/Others/.question_unown.png"
-randomNumber=$((RANDOM % ${#PICS[@]}))
+randomNumber=$(shuf -i 0-$((${#PICS[@]} - 1)) -n1)
 randomPicture="${PICS[$randomNumber]}"
 randomChoice="[${#PICS[@]}] Random"
 
@@ -114,10 +114,10 @@ executeCommand() {
   local wp="$1"
 
   # Set wallpaper
-  swww img "$wp" "${SWWW_PARAMS[@]}"
+  awww img "$wp" "${AWWW_PARAMS[@]}"
   ln -sf "$wp" "$currentLink"
 
-  if ! MATUGEN_OUTPUT=$(matugen --mode dark image "$wp" 2>&1); then
+  if ! MATUGEN_OUTPUT=$(matugen --mode dark --source-color-index 0 image "$wp" 2>&1); then
     notify-send -u low "⚠️ Matugen encountered an error: $MATUGEN_OUTPUT"
     echo "$MATUGEN_OUTPUT"
   fi
