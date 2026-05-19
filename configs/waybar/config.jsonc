@@ -14,17 +14,17 @@
   "modules-right": [
     "custom/screen_rec_indicator",
     "group/players",
-    "group/hardware",
     "group/wireless",
     "group/volume",
+    "group/hardware",
     "custom/notification"
   ],
   "hyprland/workspaces": {
     "format": "<span size='13pt'><b>{icon}</b></span>",
     "on-click": "activate",
     "sort-by-number": true,
-    "on-scroll-up": "hyprctl dispatch workspace e-1",
-    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
     "format-icons": {
       "1": "一",
       "2": "二",
@@ -44,7 +44,7 @@
     "format": "<span font=\"Font Awesome 7 Free\">{player_icon}</span> {title}",
     "format-paused": "<span font=\"Font Awesome 7 Free\">{status_icon}</span> {title}",
     "max-length": 20,
-    "dynamic-len": 10,
+    "dynamic-len": 0,
     "player-icons": {
       "default": "<b></b>",
       "vlc": "<span color='#E85E00'><b>󰕼</b></span>",
