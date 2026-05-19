@@ -3,13 +3,13 @@
 caching = true
 
 [templates.hyprcolors]
-input_path = '~/.config/matugen/templates/hyprcolors.conf'
-output_path = '~/.config/hypr/configs/hyprcolor.conf'
+input_path = '~/.config/matugen/templates/hyprcolors.template'
+output_path = '~/.config/hypr/configs/hyprcolor.lua'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty.conf'
 output_path = '~/.config/kitty/kittycolors.conf'
-post_hook = 'pkill -SIGUSR1 kitty'
+post_hook = 'pkill -SIGUSR1 kitty || true'
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi.rasi'
@@ -39,12 +39,12 @@ output_path = '~/.config/gtk-4.0/colors.css'
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.in'
 output_path = '~/.config/cava/themes/matugenTheme'
-post_hook = 'pkill -USR1 cava'
+post_hook = 'pkill -USR1 cava || true'
 
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
-post_hook = 'pkill -SIGUSR2 btop'
+post_hook = 'pkill -SIGUSR2 btop || true'
 
 [templates.swaync]
 input_path = '~/.config/matugen/templates/swaync.template'
