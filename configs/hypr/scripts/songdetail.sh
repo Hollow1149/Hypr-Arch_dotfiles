@@ -5,10 +5,14 @@ artist=$(mpc current -f "%artist%")
 
 status=$(mpc status | awk 'NR==2 {print $1}')
 
-if [ "$status" == "[paused]" ]; then
+if [ "${#status}" -eq 0 ]; then
+  icon=""
+elif [ "$status" == "[playing]" ]; then
+  icon="[Playing]"
+elif [ "$status" == "[paused]" ]; then
   icon="[Paused]"
 else
-  icon="[Playing]"
+  icon=""
 fi
 
 case "$1" in
