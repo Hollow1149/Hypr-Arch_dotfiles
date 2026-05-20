@@ -7,6 +7,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PGHOST=~/Applications/PostgreSQL_db/
 export EDITOR="nvim"
 export VISUAL="nvim"
+. "$HOME/.local/share/../bin/env"
 
 #####################
 ### Shell Options ###
@@ -129,12 +130,17 @@ function y() {
 ###############
 ### Aliases ###
 ###############
-alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/Artemis/Applications/PostgreSQL_db/logfile start"
+alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/Artemis/Applications/PostgreSQL_db/logfile  start"
 alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
-alias lsda="lsd -A"
 alias superyay="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --yay"
 alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
 alias gemini="cd ~/Projects/cllmm/gemini && command gemini"
+alias copilot="cd ~/Projects/cllmm/copilot/ && command copilot"
+
+#######################################
+### Run Pokeget for pokemon sprites ###
+#######################################
+pokeget --hide-name random
 
 #########################
 ### NVM related stuff ###
@@ -144,10 +150,3 @@ export NVM_DIR="$HOME/.config/nvm"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#######################################
-### Run Pokeget for pokemon sprites ###
-#######################################
-pokeget --hide-name random
-
-. "$HOME/.local/share/../bin/env"
