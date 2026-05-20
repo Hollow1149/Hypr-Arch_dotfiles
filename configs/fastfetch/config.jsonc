@@ -2,10 +2,11 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
     "type": "auto",
-    "source": "~/.config/fastfetch/mikuArch.png",
-    "width": 60,
+    "source": "~/.config/fastfetch/anime_logo.txt",
+    "width": null,
     "color": {
-      "1": "green"
+      "1": "blue",
+      "2": "white"
     },
     "padding": {
       "top": 2,
