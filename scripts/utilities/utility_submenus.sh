@@ -9,11 +9,11 @@ screenshot_options=(
 )
 
 screenrecord_options=(
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b> Stop Recording"
   "No Audio and No Webcam      <b><span font='Font Awesome 7 Free' size='large'>  </span></b>"
   "With Desktop Audio          <b><span font='Font Awesome 7 Free' size='large'></span></b>"
   "With Desktop + Mic Audio    <b><span font='Font Awesome 7 Free' size='large'> </span></b>"
   "With Desktop + Mic + Webcam <b><span font='Font Awesome 7 Free' size='large'>  </span></b>"
-  "<b><span font='Font Awesome 7 Free' size='large'></span></b> Stop Recording"
 )
 
 shader_options=("Off")
@@ -25,18 +25,27 @@ shader_menu() {
 
   shader_choice=$(printf "%s\n" "${shader_options[@]}" | sed 's/^[[:space:]]*//' | "${rofi_cmd[@]}")
 
-  echo "$shader_choice"
-
   if [[ -z "$shader_choice" ]]; then
     exit 0
   fi
 
+  shader_choice="${shader_choice//[*]/}"
+  shader_choice="${shader_choice#"${shader_choice%%[![:space:]]*}"}"
+  shader_choice="${shader_choice%"${shader_choice##*[![:space:]]}"}"
+
+  current_shader=$(hyprshade current)
+
   if [[ "$shader_choice" == "Off" ]]; then
     hyprshade off
     hyprctl reload
-  else
+  elif [[ "$shader_choice" == "$current_shader" ]]; then
+    hyprshade off
     hyprctl reload
+    notify-send -u normal "Damage Tracking Disabled"
+  else
+    hyprctl eval 'hl.config({ debug = { damage_tracking = 0} })'
     hyprshade on "$shader_choice"
+    notify-send -u critical --icon dialog-error "Damage Tracking Enabled" "Turn off the shader using the 'off' option only."
   fi
 }
 
