@@ -8,7 +8,7 @@ local colors = require("configs/hyprcolor").colors
 hl.config({
 	general = {
 		gaps_in = 3,
-		gaps_out = 5,
+		gaps_out = 3,
 
 		border_size = 0,
 
@@ -45,8 +45,8 @@ hl.config({
 
 		blur = {
 			enabled = true,
-			size = 8,
-			passes = 3,
+			size = 6,
+			passes = 4,
 			new_optimizations = true,
 			ignore_opacity = true,
 			xray = false,
@@ -68,8 +68,9 @@ hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 }
 hl.curve("easeInSine", { type = "bezier", points = { { 0.12, 0 }, { 0.39, 0 } } })
 hl.curve("easeOutSine", { type = "bezier", points = { { 0.61, 1 }, { 0.88, 1 } } })
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
+hl.curve("easeOutCubic", { type = "bezier", points = { { 0.33, 1 }, { 0.68, 1 } } })
 hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
-hl.curve("easeOutBounce", { type = "bezier", points = { { 0.34, 1.56 }, { 0.64, 1 } } })
+hl.curve("easeOutBounce", { type = "bezier", points = { { 0.34, 1.56 }, { 0.64, 0.8 } } })
 hl.curve("easeInQuart", { type = "bezier", points = { { 0.5, 0 }, { 0.75, 0 } } })
 hl.curve("easeOutQuart", { type = "bezier", points = { { 0.165, 0.84 }, { 0.44, 1 } } })
 hl.curve("easeInQuad", { type = "bezier", points = { { 0.11, 0 }, { 0.5, 0 } } })
@@ -84,24 +85,38 @@ hl.curve("easeInOutCirc", { type = "bezier", points = { { 0.85, 0 }, { 0.15, 1 }
 
 -- Default springs
 hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve("experiment", { type = "spring", mass = 1, stiffness = 350, dampening = 25 })
+hl.curve("appleDefault", { type = "spring", mass = 1, stiffness = 600, dampening = 35 })
+hl.curve("appleSmooth", { type = "spring", mass = 1, stiffness = 483.6, dampening = 41.5 })
+hl.curve("materialNoBounce", { type = "spring", mass = 1, stiffness = 200, dampening = 28.3 })
+hl.curve("materialBouncy", { type = "spring", mass = 1, stiffness = 1500, dampening = 38.7 })
+hl.curve("reactDefault", { type = "spring", mass = 1, stiffness = 550, dampening = 45 })
+hl.curve("reactWobbly", { type = "spring", mass = 1, stiffness = 180, dampening = 12 })
+hl.curve("reactGentle", { type = "spring", mass = 1, stiffness = 120, dampening = 14 })
+hl.curve("reactStiff", { type = "spring", mass = 1, stiffness = 410, dampening = 28 })
+hl.curve("reactSlow", { type = "spring", mass = 1, stiffness = 280, dampening = 60 })
+hl.curve("reactMolasses", { type = "spring", mass = 1, stiffness = 280, dampening = 120 })
+hl.curve("framerDefault", { type = "spring", mass = 1, stiffness = 100, dampening = 10 })
+hl.curve("crispSnap", { type = "spring", mass = 1, stiffness = 300, dampening = 34.6 })
 
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuart" })
+hl.animation({ leaf = "border", enabled = true, speed = 2.5, bezier = "easeOutQuart" })
 hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 3.5, spring = "easy", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 3.5, bezier = "easeOutQuint", style = "slide" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "slide" })
-hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 1, spring = "appleDefault", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.5, spring = "crispSnap", style = "popin 87%" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 2.6, spring = "reactDefault" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3, bezier = "quick" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.7, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.5, bezier = "almostLinear" })
+hl.animation({ leaf = "layers", enabled = true, speed = 3.8, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 3.5, spring = "reactStiff", style = "slide" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, spring = "materialNoBounce", style = "slide" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.8, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.4, bezier = "almostLinear" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 3, bezier = "easeOutQuart", style = "slidefade 50%" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 2.3, bezier = "easeInOutExpo", style = "slidefade 80%" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 2.5, bezier = "easeInOutExpo", style = "slidefade 80%" })
-hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 2.3, bezier = "easeOutCubic", style = "slidefade 80%" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 2.5, bezier = "easeInOutCubic", style = "slidefade 80%" })
+hl.animation({ leaf = "zoomFactor", enabled = true, speed = 3.5, bezier = "quick" })
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
@@ -121,8 +136,10 @@ hl.config({
 hl.config({
 	scrolling = {
 		direction = "right",
-		column_width = 0.8,
+		wrap_focus = true,
+		column_width = 0.9,
 		follow_focus = true,
+		focus_fit_method = 1,
 		follow_min_visible = 0.3,
 		fullscreen_on_one_column = false,
 	},
