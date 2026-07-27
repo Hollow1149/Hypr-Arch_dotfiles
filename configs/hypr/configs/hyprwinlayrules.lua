@@ -42,7 +42,6 @@ hl.window_rule({
 	name = "float-zen-pip",
 	match = { title = "Picture-in-Picture", initial_title = "Picture-in-Picture" },
 	float = true,
-	center = true,
 	size = { "(monitor_w*0.3)", "(monitor_h*0.3)" },
 	move = { 1342, 754 },
 })
@@ -188,6 +187,12 @@ hl.window_rule({
 	stay_focused = true,
 	move = { 1342, 34 },
 	size = { "(monitor_w*0.3)", "(monitor_h*0.533)" },
+})
+
+hl.window_rule({
+	name = "system-update-window",
+	match = { class = "kitty", title = "System Update" },
+	workspace = "special:magic",
 })
 
 -- Example window rules that are useful
