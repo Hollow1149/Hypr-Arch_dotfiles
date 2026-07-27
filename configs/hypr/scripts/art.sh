@@ -30,7 +30,7 @@ TEMP_FILE="$CACHE_FILE.tmp.png"
 # Extract embedded album art
 EXT=$(echo "${relative_file##*.}" | tr '[:upper:]' '[:lower:]')
 case "$EXT" in
-m4a | mp4 | mp3 | aac)
+m4a | mp4 | mp3 | aac | opus)
   ffmpeg -y -i "$FULL_PATH" -map 0:v:0 "$TEMP_FILE"
   ;;
 flac)
