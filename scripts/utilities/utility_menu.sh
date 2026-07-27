@@ -18,6 +18,7 @@ source "$HOME/.local/bin/myScripts/utilities/utility_functions.sh"
 utilities=(
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  WiFi Menu"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Bluetooth Menu"
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  System Update"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Screenshot"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  ScreenRecord"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Hyprpicker"
@@ -41,6 +42,9 @@ case "$choice" in
   ;;
 *"Screenshot")
   screenshot
+  ;;
+*"System Update")
+  system_update
   ;;
 *"ScreenRecord")
   screenrecord
