@@ -11,15 +11,15 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(vars.terminal))
-hl.bind(mainMod .. " + K", hl.dsp.window.close())
+hl.bind(mainMod .. " + N", hl.dsp.window.close()) -- nuke a program
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(vars.menu))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(vars.fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(vars.clipboard))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(vars.emojis))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("uwsm-app -- hyprlock"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("uwsm-app -- hyprlock")) -- isolate
 hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(vars.utilMenu))
 hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(vars.screenshot .. " --smart"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(vars.wallpaper .. " --menu"))
@@ -30,28 +30,30 @@ hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen("fullscreen", "toggl
 hl.bind("ALT + F4", hl.dsp.exec_cmd(vars.powerMenu))
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 
 -- Move and Resize Windows
-hl.bind(mainMod .. " + ALT + up", hl.dsp.window.resize({ x = 0, y = -25, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + down", hl.dsp.window.resize({ x = 0, y = 25, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + left", hl.dsp.window.resize({ x = -25, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + right", hl.dsp.window.resize({ x = 25, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + ALT + K", hl.dsp.window.resize({ x = 0, y = -25, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + ALT + J", hl.dsp.window.resize({ x = 0, y = 25, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + ALT + H", hl.dsp.window.resize({ x = -25, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + ALT + L", hl.dsp.window.resize({ x = 25, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 
 -- Move and Resize Windows in Scrolling Layout
 hl.bind(mainMod .. " + period", hl.dsp.layout("move +col"))
 hl.bind(mainMod .. " + comma", hl.dsp.layout("move -col"))
 hl.bind(mainMod .. " + SHIFT + period", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. " + SHIFT + comma", hl.dsp.layout("swapcol l"))
-hl.bind(mainMod .. " + ALT + period", hl.dsp.layout("colresize +0.1"))
-hl.bind(mainMod .. " + ALT + comma", hl.dsp.layout("colresize -0.1"))
+hl.bind(mainMod .. " + ALT + period", hl.dsp.layout("colresize +0.05"), { repeating = true })
+hl.bind(mainMod .. " + ALT + comma", hl.dsp.layout("colresize -0.05"), { repeating = true })
+hl.bind(mainMod .. " + bracketleft", hl.dsp.layout("consume_or_expel prev"))
+hl.bind(mainMod .. " + bracketright", hl.dsp.layout("consume_or_expel next"))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
