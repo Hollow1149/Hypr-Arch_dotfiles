@@ -22,6 +22,10 @@ bluetooth_menu() {
   esac
 }
 
+system_update() {
+  kitty -T "System Update" "$HOME/.local/bin/myScripts/utilities/system_updater.sh"
+}
+
 screenshot() {
   screenshot_menu
 }
