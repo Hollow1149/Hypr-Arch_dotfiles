@@ -92,7 +92,7 @@ void main() {
 
   // BLOOM
   const float blur_directions =
-      24.0;                       // default is 12.0 but 24.0+ will look bestest
+      18.0;                       // default is 12.0 but 24.0+ will look bestest
   const float blur_quality = 4.0; // default is 3.0  but 4.0+  will look bestest
   const float blur_size = 12.0;   // radius in pixels
   const float blur_brightness = 6.5; // radius in pixels
@@ -168,7 +168,7 @@ void main() {
   col *= 0.5;
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // VIGNETTE FROM CURVATURE
-  const float vignetteStrenght = 200.;
+  const float vignetteStrenght = 100.;
   const float vignetteExtend = 0.5;
 
   vec2 uv_ = uv * (1.0 - uv.yx);
