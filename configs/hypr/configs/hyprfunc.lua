@@ -52,6 +52,9 @@ hl.config({
 		kb_options = "caps:swapescape",
 		kb_rules = "",
 
+		repeat_rate = 35,
+		repeat_delay = 250,
+
 		follow_mouse = 1,
 
 		accel_profile = "flat",
