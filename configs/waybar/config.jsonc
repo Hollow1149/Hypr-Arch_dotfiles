@@ -20,11 +20,10 @@
     "custom/notification"
   ],
   "hyprland/workspaces": {
-    "format": "<span size='13pt'><b>{icon}</b></span>",
-    "on-click": "activate",
+    "format": "<span size='12pt'><b>{icon}</b></span>",
     "sort-by-number": true,
-    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
-    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
     "format-icons": {
       "1": "一",
       "2": "二",
