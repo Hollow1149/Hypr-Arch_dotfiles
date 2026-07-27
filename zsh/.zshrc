@@ -69,10 +69,17 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit snippet OMZP::command-not-found
 
 ### Zinit Plugins ###
-zinit light zsh-users/zsh-syntax-highlighting
+zinit ice depth=1
 zinit light zsh-users/zsh-completions
+
+zinit ice depth=1
 zinit light zsh-users/zsh-autosuggestions
+
+zinit ice depth=1
 zinit light Aloxaf/fzf-tab
+
+zinit ice depth=1
+zinit light zsh-users/zsh-syntax-highlighting
 
 
 ########################
@@ -107,7 +114,6 @@ zinit cdreplay -q
 ###########################
 
 export _ZO_ECHO=1
-export _ZO_EXCLUDE_DIRS=$HOME:$HOME/Projects/cllmm/*
 eval "$(zoxide init --cmd cd zsh)"
 
 ############################
@@ -134,8 +140,6 @@ alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/
 alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
 alias superyay="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --yay"
 alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
-alias gemini="cd ~/Projects/cllmm/gemini && command gemini"
-alias copilot="cd ~/Projects/cllmm/copilot/ && command copilot"
 
 #######################################
 ### Run Pokeget for pokemon sprites ###
