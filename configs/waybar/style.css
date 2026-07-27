@@ -62,7 +62,7 @@ tooltip {
 
 
 #workspaces {
-  margin: 2px 4px 2px 5px;
+  margin: 2px 4px 2px 4px;
   padding: 1px 4px;
   /* remove padding around workspace module */
   background-color: alpha(@surface_container, 0.9);
@@ -71,10 +71,9 @@ tooltip {
 
 #workspaces button {
   color: @inverse_primary;
-  font-size: 10px;
   box-shadow: none;
   text-shadow: none;
-  padding: 4px 4px 4px 4px;
+  padding: 0px 4px 1px 4px;
   /* fit with pill padding, 0px for not haveing duped vertical padding, 4px to make a square (4px value from module padding: ...#clock {padding >>4px<< 10px}) */
   margin-left: 3px;
   margin-right: 3px;
