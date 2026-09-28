@@ -293,12 +293,9 @@
           stereo: true,
       ),
       smoothing: (
-          noise_reduction: 50, // default 77
+          noise_reduction: 77, // default 77
           monstercat: false, // default false
-          waves: true, // default false
+          waves: false, // default false
       ),
-      // this is a list of floating point numbers thats directly passed to cava
-      // they are passed in order that they are defined
-      eq: [1.2, 1.1, 1.0, 1.0, 1.0, 1.0, 1.1, 1.2]
     )
 )
