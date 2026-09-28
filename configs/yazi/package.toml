@@ -1,27 +1,27 @@
 [[plugin.deps]]
-use = "yazi-rs/plugins:full-border"
-rev = "4c63ed3"
-hash = "7b625412411be411153886894d9acaf"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:smart-paste"
-rev = "4c63ed3"
-hash = "3f8d49413bc8691b4c652eb417a20178"
+rev = "f703392"
+hash = "5be02722d97561b6f7aec22429aa00be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "4c63ed3"
-hash = "15e5b67a241172cbb86b8fbf9e63692"
+rev = "f703392"
+hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
 use = "boydaihungst/mediainfo"
-rev = "e079a00"
-hash = "5e203acd4ff62c96cbc2887c8142d78"
+rev = "f1cec0b"
+hash = "ba582ccda4ebc7c70bfe9a1496589b80"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "406ce6c"
-hash = "f5afc904d5106ee368c8aa2ded43bd74"
+rev = "596b666"
+hash = "c2f4f4aca257dcceafa9e3b828dbf1c9"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "f703392"
+hash = "f281261ff04ad7ec867c3f802a50835f"
 
 [flavor]
 deps = []
