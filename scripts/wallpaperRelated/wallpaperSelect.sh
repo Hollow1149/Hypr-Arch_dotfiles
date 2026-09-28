@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o nounset
 set -Eeuo pipefail
-
-get_thumb_path() {
-  echo "${thumbDir}/${1//\//_}.png"
-}
 
 # For Hyprland + awww
 
@@ -37,28 +31,24 @@ AWWW_PARAMS=(--transition-fps "${FPS}" --transition-type "${TYPE}" --transition-
 
 # Thumbnail generation
 generate_thumbnail() {
-
   export thumbDir
-  <"$listCache" xargs -P "$(nproc)" -I{} bash -c '
-  pic="{}"
-  # Pure bash replace: ${variable//search/replace}
+  tr '\n' '\0' <"$listCache" | xargs -0 -P "$(nproc)" -I{} bash -c '
+  pic="$1"
   thumb="${thumbDir}/${pic//\//_}.png"
-
   [[ -f "$thumb" ]] && exit 0
-  
   if [[ "$pic" == *.gif ]]; then
-    magick "$pic[0]" -thumbnail 500 "$thumb"
+    magick "$pic[0]" -thumbnail 256 "$thumb"
   else
-    magick "$pic" -thumbnail 500 "$thumb"
+    magick "$pic" -thumbnail 256 "$thumb"
   fi
-  '
+  ' - {}
 }
 
 # === COLLECT WALLPAPERS ===
-if [[ ! -f "$listCache" || "$wallpaperDir" -nt "$listCache" ]]; then
+if [[ ! -f "$listCache" ]] || find -L "$wallpaperDir" -newer "$listCache" -print -quit | grep -q .; then
   find -L "$wallpaperDir" -type f \
     \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) |
-    sort >"$listCache"
+    LC_ALL=C sort >"$listCache"
 
   # Clean up Logic
   # 1. Get current thumbnails (filenames only)
@@ -83,9 +73,39 @@ fi
 
 # Random wallpaper logic
 randomPreviewImage="$HOME/Pictures/Others/.question_unown.png"
-randomNumber=$(shuf -i 0-$((${#PICS[@]} - 1)) -n1)
-randomPicture="${PICS[$randomNumber]}"
+randomQueueFile="$cacheDir/random_queue.txt"
 randomChoice="[${#PICS[@]}] Random"
+
+pick_random_picture() {
+  local current
+  current="$(readlink -f "$currentLink" 2>/dev/null || true)"
+
+  while true; do
+    if [[ ! -s "$randomQueueFile" ]]; then
+      grep -iv '\.gif$' "$listCache" | shuf >"$randomQueueFile"
+
+      if [[ ! -s "$randomQueueFile" ]]; then
+        notify-send -u critical "No non-GIF wallpaper found."
+        return 1
+      fi
+
+    fi
+
+    local candidate
+    candidate=$(head -n1 "$randomQueueFile")
+    tail -n +2 "$randomQueueFile" >"${randomQueueFile}.tmp" && mv "${randomQueueFile}.tmp" "$randomQueueFile"
+
+    [[ -f "$candidate" ]] || continue
+
+    if [[ "$candidate" == "$current" && -s "$randomQueueFile" ]]; then
+      echo "$candidate" >>"$randomQueueFile"
+      continue
+    fi
+
+    echo "$candidate"
+    return
+  done
+}
 
 # Rofi command
 rofiCommand=(
@@ -94,6 +114,7 @@ rofiCommand=(
   -dmenu
   -theme "${themesDir}/wallpaper-select.rasi"
   -format i
+  -no-custom
 )
 
 # === DISPLAY ROFI MENU ===
@@ -101,10 +122,9 @@ menu() {
   # Generate menu entries
   printf "%s\x00icon\x1f%s\n" "$randomChoice" "$randomPreviewImage"
   for pic in "${PICS[@]}"; do
-    filename="$(basename "$pic")"
+    filename="${pic##*/}"
     name="${filename%.*}"
-
-    thumb="$(get_thumb_path "$pic")"
+    thumb="${thumbDir}/${pic//\//_}.png"
     printf "%s\x00icon\x1f%s\x00info\x1f%s\n" "$name" "$thumb" "$pic"
   done
 }
@@ -117,7 +137,7 @@ executeCommand() {
   awww img "$wp" "${AWWW_PARAMS[@]}"
   ln -sf "$wp" "$currentLink"
 
-  if ! MATUGEN_OUTPUT=$(matugen --mode dark --source-color-index 0 image "$wp" 2>&1); then
+  if ! MATUGEN_OUTPUT=$(matugen --mode dark --type scheme-smart --resize-filter lanczos3 --source-color-index 0 image "$wp" 2>&1); then
     notify-send -u low "⚠️ Matugen encountered an error: $MATUGEN_OUTPUT"
     echo "$MATUGEN_OUTPUT"
   fi
@@ -145,12 +165,14 @@ openMenu() {
   choice_index=$(menu | "${rofiCommand[@]}")
 
   # Check if choice is empty (ESC pressed)
-  [[ -z "$choice_index" ]] && exit 0
+  if [[ -z "$choice_index" || "$choice_index" -lt 0 ]]; then
+    exit 0
+  fi
 
   # The random entry is the first item printed (index 0)
   # The wallpapers start at index 1
   if [[ "$choice_index" -eq 0 ]]; then
-    executeCommand "$randomPicture"
+    executeCommand "$(pick_random_picture)"
     exit 0
   fi
 
@@ -178,13 +200,17 @@ case "$1" in
     echo "Error: usage $0 --set <file>"
     exit 1
   fi
+  if [[ ! -f "$1" ]]; then
+    echo "Error: file not found: $1"
+    exit 1
+  fi
   executeCommand "$1"
   ;;
 --menu)
   openMenu
   ;;
 --random)
-  executeCommand "$randomPicture"
+  executeCommand "$(pick_random_picture)"
   exit 0
   ;;
 *)
