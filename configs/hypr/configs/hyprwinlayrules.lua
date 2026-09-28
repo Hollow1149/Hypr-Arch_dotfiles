@@ -38,12 +38,14 @@ hl.window_rule({
 	size = { "(monitor_w*0.5)", "(monitor_h*0.7)" },
 })
 
+-- Picture-in-Picture
 hl.window_rule({
-	name = "float-zen-pip",
-	match = { title = "Picture-in-Picture", initial_title = "Picture-in-Picture" },
+	name = "pip",
+	match = { title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$" },
 	float = true,
-	size = { "(monitor_w*0.3)", "(monitor_h*0.3)" },
-	move = { 1342, 754 },
+	keep_aspect_ratio = true,
+	size = { "max(monitor_w, monitor_h)*0.25", "min(monitor_w, monitor_h)*0.25" },
+	pin = true,
 })
 
 hl.window_rule({
@@ -109,9 +111,23 @@ hl.window_rule({
 	workspace = "2",
 })
 
+-- Gaming
+local gamingApps = "^(org\\.azahar_emu\\.Azahar|eden|io\\.github\\.elyprismlauncher\\.ElyPrismLauncher|Minecraft\\*.*)$"
+local gamingWorkspace = "name:gaming"
+
 hl.window_rule({
-	name = "eden-less-deco",
-	match = { class = "eden" },
+	match = { class = gamingApps },
+	workspace = gamingWorkspace,
+})
+
+hl.window_rule({
+	match = { class = gamingApps },
+	content = "game",
+})
+
+hl.window_rule({
+	name = "gamingRules",
+	match = { class = gamingApps },
 	no_blur = true,
 	no_shadow = true,
 	opaque = true,
