@@ -6,8 +6,23 @@
 --- Variables ---
 -----------------
 local vars = require("configs.hyprvars")
-
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+
+-- Per Layout Bindings
+local function layout_bind(bind_table)
+	return function()
+		local workspace = hl.get_active_special_workspace() or hl.get_active_workspace()
+		if not workspace then
+			return
+		end
+
+		local layout = workspace.tiled_layout
+
+		if bind_table[layout] then
+			hl.dispatch(bind_table[layout])
+		end
+	end
+end
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(vars.terminal))
@@ -16,7 +31,12 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(vars.menu))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(vars.fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(
+	mainMod .. " + O",
+	layout_bind({
+		dwindle = hl.dsp.layout("togglesplit"),
+	})
+)
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(vars.clipboard))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(vars.emojis))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("uwsm-app -- hyprlock")) -- isolate
@@ -46,14 +66,152 @@ hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 
 -- Move and Resize Windows in Scrolling Layout
-hl.bind(mainMod .. " + period", hl.dsp.layout("move +col"))
-hl.bind(mainMod .. " + comma", hl.dsp.layout("move -col"))
-hl.bind(mainMod .. " + SHIFT + period", hl.dsp.layout("swapcol r"))
-hl.bind(mainMod .. " + SHIFT + comma", hl.dsp.layout("swapcol l"))
-hl.bind(mainMod .. " + ALT + period", hl.dsp.layout("colresize +0.05"), { repeating = true })
-hl.bind(mainMod .. " + ALT + comma", hl.dsp.layout("colresize -0.05"), { repeating = true })
-hl.bind(mainMod .. " + bracketleft", hl.dsp.layout("consume_or_expel prev"))
-hl.bind(mainMod .. " + bracketright", hl.dsp.layout("consume_or_expel next"))
+hl.bind(
+	mainMod .. " + SHIFT + period",
+	layout_bind({
+		scrolling = hl.dsp.layout("swapcol r"),
+	})
+)
+hl.bind(
+	mainMod .. " + SHIFT + comma",
+	layout_bind({
+		scrolling = hl.dsp.layout("swapcol l"),
+	})
+)
+hl.bind(
+	mainMod .. " + ALT + period",
+	layout_bind({
+		scrolling = hl.dsp.layout("colresize +0.05"),
+	}),
+	{ repeating = true }
+)
+hl.bind(
+	mainMod .. " + ALT + comma",
+	layout_bind({
+		scrolling = hl.dsp.layout("colresize -0.05"),
+	}),
+	{ repeating = true }
+)
+hl.bind(
+	mainMod .. " + bracketleft",
+	layout_bind({
+		scrolling = hl.dsp.layout("consume_or_expel prev"),
+	})
+)
+hl.bind(
+	mainMod .. " + bracketright",
+	layout_bind({
+		scrolling = hl.dsp.layout("consume_or_expel next"),
+	})
+)
+
+-- Move Windows in Scrolling and Monocle Layout
+hl.bind(
+	mainMod .. " + comma",
+	layout_bind({
+		scrolling = hl.dsp.layout("move -col"),
+		monocle = hl.dsp.layout("cycleprev"),
+	})
+)
+
+hl.bind(
+	mainMod .. " + period",
+	layout_bind({
+		scrolling = hl.dsp.layout("move +col"),
+		monocle = hl.dsp.layout("cyclenext"),
+	})
+)
+
+-- Cursor Zoom
+local MAX_ZOOM = 10
+local MIN_ZOOM = 1
+local ZOOM_TOGGLE_FACTOR = 1.5
+
+--@param offset number
+--@return nil
+local function zoom(offset)
+	local current = hl.get_config("cursor.zoom_factor")
+	if offset ~= nil then
+		current = current + offset
+	elseif current ~= MIN_ZOOM then
+		current = MIN_ZOOM
+	else
+		current = ZOOM_TOGGLE_FACTOR
+	end
+	current = math.max(MIN_ZOOM, math.min(MAX_ZOOM, current))
+	hl.config({ cursor = { zoom_factor = current } })
+end
+
+hl.bind(mainMod .. " + Z", zoom)
+hl.bind(mainMod .. " + equal", function()
+	zoom(0.25)
+end, { repeating = true })
+
+hl.bind(mainMod .. " + minus", function()
+	zoom(-0.25)
+end, { repeating = true })
+
+-- Gaming
+hl.bind(mainMod .. " + G", hl.dsp.focus({ workspace = "name:gaming" }))
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.window.move({ workspace = "name:gaming" }))
+
+-- Enable Focus Mode/ Game Mode/ Battery Saving Mode
+hl.bind(mainMod .. " + ALT + G", function()
+	local game_mode = (hl.get_config("animations.enabled") == false)
+
+	if game_mode then
+		hl.exec_cmd("hyprctl reload")
+		return
+	end
+
+	hl.config({
+		general = {
+			gaps_in = 0,
+			gaps_out = 0,
+			border_size = 0,
+		},
+
+		animations = {
+			enabled = false,
+		},
+
+		decoration = {
+			shadow = { enabled = false },
+			blur = { enabled = false },
+			rounding = 0,
+		},
+	})
+end)
+
+-- Switch/Cycle Layouts for current workspace
+hl.bind(mainMod .. " + tab", function()
+	local layouts = { "scrolling", "dwindle", "master", "monocle" }
+	local workspace = hl.get_active_workspace()
+
+	if hl.get_active_special_workspace() then
+		workspace = hl.get_active_special_workspace()
+	end
+
+	local next_layout = "dwindle"
+
+	if not workspace then
+		return
+	end
+
+	for i = 1, #layouts do
+		if layouts[i] == workspace.tiled_layout then
+			local next_layout_idx = (i % #layouts) + 1
+			next_layout = layouts[next_layout_idx]
+			break
+		end
+	end
+
+	if workspace.special then
+		hl.workspace_rule({ workspace = tostring(workspace.name), layout = next_layout })
+	else
+		hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
+	end
+end)
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
