@@ -26,6 +26,13 @@ system_update() {
   kitty -T "System Update" "$HOME/.local/bin/myScripts/utilities/system_updater.sh"
 }
 
+hyprctl_reload() {
+  hyprctl reload
+
+  notify-send -u normal --icon reload "Hyprland Config Reloaded"
+
+}
+
 screenshot() {
   screenshot_menu
 }

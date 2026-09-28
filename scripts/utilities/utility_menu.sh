@@ -19,6 +19,7 @@ utilities=(
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  WiFi Menu"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Bluetooth Menu"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  System Update"
+  "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Hyprctl Reload"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Screenshot"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  ScreenRecord"
   "<b><span font='Font Awesome 7 Free' size='large'></span></b>  Hyprpicker"
@@ -40,11 +41,14 @@ case "$choice" in
 *"Bluetooth Menu")
   bluetooth_menu
   ;;
-*"Screenshot")
-  screenshot
-  ;;
 *"System Update")
   system_update
+  ;;
+*"Hyprctl Reload")
+  hyprctl_reload
+  ;;
+*"Screenshot")
+  screenshot
   ;;
 *"ScreenRecord")
   screenrecord
