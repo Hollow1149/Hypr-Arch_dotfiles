@@ -14,15 +14,15 @@ return {
       desc = "Open yazi at the current file",
     },
     {
+      "<leader>yr",
+      "<cmd>Yazi toggle<cr>",
+      desc = "Resume the last yazi session",
+    },
+    {
       -- Open in the current working directory
       "<leader>yw",
       "<cmd>Yazi cwd<cr>",
       desc = "Open the file manager in nvim's working directory",
-    },
-    {
-      "<leader>yr",
-      "<cmd>Yazi toggle<cr>",
-      desc = "Resume the last yazi session",
     },
   },
   opts = {
@@ -41,6 +41,9 @@ return {
     vim.g.loaded_netrwPlugin = 1
   end,
   require("which-key").add({
-    { "<leader>y", group = "Yazi" },
+    { "<leader>y", group = "Yazi", icon = { icon = "", color = "yellow" } },
+    { "<leader>yc", icon = { icon = "", color = "cyan" } },
+    { "<leader>yr", icon = { icon = "", color = "green" } },
+    { "<leader>yw", icon = { icon = "", color = "blue" } },
   }),
 }
