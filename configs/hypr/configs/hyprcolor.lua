@@ -6,105 +6,105 @@ local template = {}
 
 template.colors = {
 
-background = 0xff0e1514,
+background = 0xff111418,
 
 error = 0xffffb4ab,
 
 error_container = 0xff93000a,
 
-inverse_on_surface = 0xff2b3231,
+inverse_on_surface = 0xff2e3035,
 
-inverse_primary = 0xff006a65,
+inverse_primary = 0xff38608f,
 
-inverse_surface = 0xffdde4e2,
+inverse_surface = 0xffe1e2e8,
 
-on_background = 0xffdde4e2,
+on_background = 0xffe1e2e8,
 
 on_error = 0xff690005,
 
 on_error_container = 0xffffdad6,
 
-on_primary = 0xff003734,
+on_primary = 0xff00325b,
 
-on_primary_container = 0xff9df1eb,
+on_primary_container = 0xffd2e4ff,
 
-on_primary_fixed = 0xff00201e,
+on_primary_fixed = 0xff001c38,
 
-on_primary_fixed_variant = 0xff00504c,
+on_primary_fixed_variant = 0xff1d4875,
 
-on_secondary = 0xff1b3533,
+on_secondary = 0xff263141,
 
-on_secondary_container = 0xffcce8e5,
+on_secondary_container = 0xffd7e3f8,
 
-on_secondary_fixed = 0xff051f1e,
+on_secondary_fixed = 0xff101c2b,
 
-on_secondary_fixed_variant = 0xff324b49,
+on_secondary_fixed_variant = 0xff3c4858,
 
-on_surface = 0xffdde4e2,
+on_surface = 0xffe1e2e8,
 
-on_surface_variant = 0xffbec9c7,
+on_surface_variant = 0xffc3c6cf,
 
-on_tertiary = 0xff19324a,
+on_tertiary = 0xff3c2947,
 
-on_tertiary_container = 0xffd0e4ff,
+on_tertiary_container = 0xfff4d9ff,
 
-on_tertiary_fixed = 0xff001d34,
+on_tertiary_fixed = 0xff261431,
 
-on_tertiary_fixed_variant = 0xff304962,
+on_tertiary_fixed_variant = 0xff533f5f,
 
-outline = 0xff889391,
+outline = 0xff8d9199,
 
-outline_variant = 0xff3f4947,
+outline_variant = 0xff43474e,
 
-primary = 0xff81d5ce,
+primary = 0xffa2c9fe,
 
-primary_container = 0xff00504c,
+primary_container = 0xff1d4875,
 
-primary_fixed = 0xff9df1eb,
+primary_fixed = 0xffd2e4ff,
 
-primary_fixed_dim = 0xff81d5ce,
+primary_fixed_dim = 0xffa2c9fe,
 
 scrim = 0xff000000,
 
-secondary = 0xffb0ccc9,
+secondary = 0xffbbc7db,
 
-secondary_container = 0xff324b49,
+secondary_container = 0xff3c4858,
 
-secondary_fixed = 0xffcce8e5,
+secondary_fixed = 0xffd7e3f8,
 
-secondary_fixed_dim = 0xffb0ccc9,
+secondary_fixed_dim = 0xffbbc7db,
 
 shadow = 0xff000000,
 
-source_color = 0xff305754,
+source_color = 0xff394d67,
 
-surface = 0xff0e1514,
+surface = 0xff111418,
 
-surface_bright = 0xff343a3a,
+surface_bright = 0xff37393e,
 
-surface_container = 0xff1a2120,
+surface_container = 0xff1d2024,
 
-surface_container_high = 0xff252b2a,
+surface_container_high = 0xff272a2f,
 
-surface_container_highest = 0xff2f3635,
+surface_container_highest = 0xff32353a,
 
-surface_container_low = 0xff161d1c,
+surface_container_low = 0xff191c20,
 
-surface_container_lowest = 0xff090f0f,
+surface_container_lowest = 0xff0b0e13,
 
-surface_dim = 0xff0e1514,
+surface_dim = 0xff111418,
 
-surface_tint = 0xff81d5ce,
+surface_tint = 0xffa2c9fe,
 
-surface_variant = 0xff3f4947,
+surface_variant = 0xff43474e,
 
-tertiary = 0xffb0c9e7,
+tertiary = 0xffd8bde4,
 
-tertiary_container = 0xff304962,
+tertiary_container = 0xff533f5f,
 
-tertiary_fixed = 0xffd0e4ff,
+tertiary_fixed = 0xfff4d9ff,
 
-tertiary_fixed_dim = 0xffb0c9e7,
+tertiary_fixed_dim = 0xffd8bde4,
 
 }
 
