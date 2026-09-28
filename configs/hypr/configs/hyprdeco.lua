@@ -37,7 +37,7 @@ hl.config({
 		dim_strength = 0.1,
 
 		shadow = {
-			enabled = true,
+			enabled = false,
 			range = 4,
 			render_power = 3,
 			color = 0xee1a1a1a,
@@ -142,18 +142,5 @@ hl.config({
 		focus_fit_method = 1,
 		follow_min_visible = 0.3,
 		fullscreen_on_one_column = false,
-	},
-})
-
-----------------
-----  MISC  ----
-----------------
-
-hl.config({
-	misc = {
-		force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
-		disable_hyprland_logo = true, -- If true disables the random hyprland logo / anime girl background. :(
-		disable_splash_rendering = true,
-		vrr = 2,
 	},
 })
