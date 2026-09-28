@@ -2,7 +2,7 @@
 status="$(nmcli general status | grep -oh "\w*connect\w*")"
 
 if [[ "$status" = "disconnected" ]]; then
-  printf "Disconnected 󰤮⠀"
+  printf "󰤮⠀\n"
 elif [[ "$status" = "connecting" ]]; then
   printf "Connecting 󱍸⠀"
 elif [[ "$status" = "connected" ]]; then
