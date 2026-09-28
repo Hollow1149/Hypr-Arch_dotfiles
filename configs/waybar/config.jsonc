@@ -35,7 +35,8 @@
       "8": "八",
       "9": "九",
       "10": "十",
-      "magic": "特"
+      "magic": "特",
+      "gaming": "<span font=\"Font Awesome 7 Free\"></span>"
     },
     "show-special": true
   },
