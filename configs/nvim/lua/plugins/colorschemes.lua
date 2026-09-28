@@ -18,7 +18,7 @@ return {
         style = "dark",
 
         -- Enable transparent background
-        transparent = true,
+        transparent = false,
 
         -- Enable italic comment
         italic_comments = true,
@@ -347,7 +347,7 @@ return {
         -- show the '~' characters after the end of buffers
         show_end_of_buffer = true, -- default false
         -- use transparent background
-        transparent_bg = false, -- default false
+        transparent_bg = true, -- default false
         -- set custom lualine background color
         -- lualine_bg_color = "#44475a", -- default nil
         -- set italic comment
@@ -377,7 +377,7 @@ return {
     config = function()
       require("cyberdream").setup({
         variant = "default",
-        transparent = false,
+        transparent = true,
         saturation = 1,
         italic_comments = true,
         hide_fillchars = false,
@@ -386,11 +386,6 @@ return {
         cache = false,
       })
     end,
-  },
-  -- [ Shadotheme ]
-  {
-    "Shadorain/shadotheme",
-    lazy = true,
   },
   -- [ Rosepine ]
   {
@@ -417,5 +412,31 @@ return {
         },
       })
     end,
+  },
+  -- [ Luna ]
+  {
+    "wtfox/luna.nvim",
+    lazy = true,
+    opts = {},
+    config = function()
+      require("luna").setup({
+        transparent = true,
+        accent = 1,
+        plugins = {
+          auto = true,
+        },
+      })
+    end,
+  },
+  -- [ TokyoNight ]
+  {
+    "folke/tokyonight.nvim",
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
   },
 }
