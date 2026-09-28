@@ -64,6 +64,35 @@ hl.config({
 			natural_scroll = false,
 		},
 	},
+	render = {
+		direct_scanout = 2,
+	},
+	xwayland = {
+		force_zero_scaling = true,
+	},
+	binds = {
+		workspace_back_and_forth = true,
+	},
+})
+
+----------------
+----  MISC  ----
+----------------
+
+hl.config({
+	ecosystem = {
+		no_donation_nag = true,
+		no_update_news = true,
+	},
+	misc = {
+		enable_swallow = false,
+		swallow_regex = "(kitty|ghostty|[Kk]onsole|Alacritty|gnome-terminal|xfce[0-9]?-terminal)",
+		middle_click_paste = true,
+		force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
+		disable_hyprland_logo = true, -- If true disables the random hyprland logo / anime girl background. :(
+		disable_splash_rendering = true,
+		vrr = 2,
+	},
 })
 
 ----------------
