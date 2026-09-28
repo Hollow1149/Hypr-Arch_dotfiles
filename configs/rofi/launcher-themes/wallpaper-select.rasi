@@ -31,7 +31,7 @@ mainbox {
 /* ---- List ---- */
 listview {
     columns:                     1;
-    lines:                       4;
+    lines:                       3;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
