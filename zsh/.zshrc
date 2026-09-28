@@ -140,11 +140,12 @@ alias pgctl_start="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ -l /home/
 alias pgctl_stop="pg_ctl -D /home/Artemis/Applications/PostgreSQL_db/ stop"
 alias superyay="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --yay"
 alias superpacman="$HOME/.local/bin/myScripts/utilities/superPackageManagers.sh --pacman"
+alias agy="cd $HOME/Code/AntiGravity/ && command agy && cd -"
 
 #######################################
 ### Run Pokeget for pokemon sprites ###
 #######################################
-pokeget --hide-name random
+# pokeget --hide-name random
 
 #########################
 ### NVM related stuff ###
